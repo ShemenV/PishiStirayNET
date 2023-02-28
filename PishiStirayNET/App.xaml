@@ -2,8 +2,38 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PishiStirayNET"
-             StartupUri="Views/Windows/MainWindow.xaml">
+             StartupUri="Views/Windows/MainWindow.xaml"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:DI x:Key="DI"/>
+
+            <SolidColorBrush x:Key="accentColor" Color="#FF498C51"/>
+            <SolidColorBrush x:Key="additionalColor" Color="#FF76E383"/>
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" 
+                    Value="Comic Sans MS"
+                    />
+                <Setter Property="Foreground"
+                    Value="{StaticResource accentColor}"/>
+               
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="materialDesign:HintAssist.FontFamily" Value="Comic Sans MS"/>
+                <Setter Property="BorderBrush" Value="{StaticResource additionalColor}"/>
+                
+            </Style>
+        </ResourceDictionary>
+
+       
     </Application.Resources>
 </Application>

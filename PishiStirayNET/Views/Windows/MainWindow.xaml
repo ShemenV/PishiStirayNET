@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PishiStirayNET"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DataGrid >
-
-        </DataGrid>
-    </Grid>
+        Title="MainWindow" 
+        Height="450" 
+        DataContext="{Binding MainWindowViewModel, Source={StaticResource DI}}"
+        Width="800">
+    
 </Window>
