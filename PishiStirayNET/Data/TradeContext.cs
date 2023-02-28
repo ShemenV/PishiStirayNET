@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PishiStirayNET.Data
 {
-    internal class TradeContext:DbContext
+    internal class TradeContext: DbContext
     {
         public DbSet<UserDB> User { get; set; }
 

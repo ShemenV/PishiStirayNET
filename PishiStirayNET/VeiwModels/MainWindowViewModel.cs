@@ -1,4 +1,5 @@
-﻿using PishiStirayNET.Models.DbEntities;
+﻿using DevExpress.Mvvm;
+using PishiStirayNET.Models.DbEntities;
 using PishiStirayNET.Services;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
-    internal class MainWindowViewModel
+    internal class MainWindowViewModel: ViewModelBase
     {
 
         private UserService _userService;
@@ -25,9 +26,9 @@ namespace PishiStirayNET.VeiwModels
 
         #endregion
 
-        public MainWindowViewModel(UserService userService)
+        public MainWindowViewModel()
         {
-            _userService = userService;
+           
            
         }
         

@@ -10,5 +10,7 @@
         Height="450" 
         DataContext="{Binding MainWindowViewModel, Source={StaticResource DI}}"
         Width="800">
-    
+    <Frame Source="/Views/Pages/SignInPage.xaml">
+        
+    </Frame>
 </Window>

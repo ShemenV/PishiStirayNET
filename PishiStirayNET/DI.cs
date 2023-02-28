@@ -21,6 +21,7 @@ namespace PishiStirayNET
             ServiceCollection services = new ServiceCollection();
 
             #region Services
+
             services.AddSingleton<UserService>();
 
             #endregion
@@ -29,6 +30,7 @@ namespace PishiStirayNET
             #region ViewModels
 
             services.AddTransient<MainWindowViewModel>();
+            services.AddTransient<SignInPageViewModel>();
 
             #endregion
 
@@ -51,5 +53,6 @@ namespace PishiStirayNET
         }
 
         public MainWindowViewModel MainWindowViewModel => _provider.GetRequiredService<MainWindowViewModel>();
+        public SignInPageViewModel SignInPageViewModel => _provider.GetRequiredService<SignInPageViewModel>();
     }
 }

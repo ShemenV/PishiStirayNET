@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:PishiStirayNET.Views.Pages"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      Background="Aqua"
+      
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SignInPage">
+      Title="SignInPage"
+      DataContext="{Binding SignInPageViewModel, Source={StaticResource DI}}">
 
     <Grid>
 
@@ -37,11 +38,14 @@
                      Grid.Row="1"
                      Margin="0,20"
                      materialDesign:HintAssist.Hint="Логин"
-                     BorderBrush="{StaticResource additionalColor}"/>
+                     Text="{Binding Login,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                     BorderBrush="{StaticResource additionalColor}"
+                     />
 
             <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                      Grid.Row="2"
                      Margin="0,20"
+                     Text="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                      materialDesign:HintAssist.Hint="Пароль"
                      BorderBrush="{StaticResource additionalColor}"/>
 
@@ -49,7 +53,8 @@
                     Margin="30,15"
                     Content="Войти"
                     Background="{StaticResource additionalColor}"
-                    Foreground="White"/>
+                    Foreground="White"
+                    Command="{Binding SignInCommand,IsAsync=True}"/>
         </Grid>
 
 
