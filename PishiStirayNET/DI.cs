@@ -3,12 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PishiStirayNET.Data;
 using PishiStirayNET.Services;
 using PishiStirayNET.VeiwModels;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PishiStirayNET
 {

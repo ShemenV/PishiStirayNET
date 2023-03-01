@@ -1,16 +1,12 @@
-﻿using DevExpress.Mvvm;
-using PishiStirayNET.Models.DbEntities;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
 using PishiStirayNET.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Security.Policy;
 
 namespace PishiStirayNET.VeiwModels
 {
-    internal class MainWindowViewModel: ViewModelBase
+    public partial class MainWindowViewModel : ObservableObject
     {
 
         private UserService _userService;
@@ -18,19 +14,22 @@ namespace PishiStirayNET.VeiwModels
 
         #region Свойства
 
+        [ObservableProperty]
+        public string? title = "This is amazing";
+
         
 
         #endregion
-         
+
         #region Команды
 
         #endregion
 
         public MainWindowViewModel()
         {
-           
-           
+
+
         }
-        
+
     }
 }
