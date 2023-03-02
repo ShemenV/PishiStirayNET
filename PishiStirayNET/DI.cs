@@ -23,6 +23,7 @@ namespace PishiStirayNET
             #region Services
 
             services.AddSingleton<UserService>();
+            services.AddSingleton<PageService>();
 
             #endregion
 

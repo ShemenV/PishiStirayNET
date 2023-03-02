@@ -14,15 +14,17 @@ namespace PishiStirayNET.VeiwModels
     {
 
         private readonly UserService _userService;
+        private readonly PageService _pageService;
 
         #region Свойства
         public string Login { get; set; }
         public string Password { get; set; }
         #endregion
 
-        public SignInPageViewModel(UserService userService)
+        public SignInPageViewModel(UserService userService, PageService pageService)
         {
             _userService = userService;
+            _pageService = pageService; 
         }
 
 
@@ -30,14 +32,15 @@ namespace PishiStirayNET.VeiwModels
         {           
             await Task.Run(async () =>
             {
-                if (_userService.Authorization(Login, Password) == true)
-                {
-                    Debug.WriteLine("Произошел вход в аккаунт");
-                }
-                else
-                {
-                    Debug.WriteLine("Неверные входные данные");
-                }
+                //if (_userService.Authorization(Login, Password) == true)
+                //{
+                //    Debug.WriteLine("Произошел вход в аккаунт");
+                //}
+                //else
+                //{
+                //    Debug.WriteLine("Неверные входные данные");
+                //}
+                _pageService.ChangePage(new ProductsPage());
             });       
             },
             bool () =>
