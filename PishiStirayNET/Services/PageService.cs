@@ -9,10 +9,6 @@
         //    OnPageChanged?.Invoke(page);
         //}
 
-        public Page? Page { get; set; }
-        public void ChangePage(Page page)
-        {
-          Page = page;
-        }
+       
     }
 }

@@ -27,29 +27,33 @@ namespace PishiStirayNET.VeiwModels
         }
 
 
-        public AsyncCommand SignInCommand => new(async ()=>
-        {           
-            await Task.Run(async () =>
-            {
-                //if (_userService.Authorization(Login, Password) == true)
-                //{
-                //    Debug.WriteLine("Произошел вход в аккаунт");
-                //}
-                //else
-                //{
-                //    Debug.WriteLine("Неверные входные данные");
-                //}
-                _pageService.ChangePage(new ProductsPage());
-            });       
-            },
-            bool () =>
-            {
-                if(string.IsNullOrWhiteSpace(Login) == true || string.IsNullOrEmpty(Password) == true)
-                {
-                    return false;
-                }
-                return true;
-            }
-            );           
+        //public AsyncCommand SignInCommand => new(async ()=>
+        //{           
+        //    await Task.Run(async () =>
+        //    {
+        //        //if (_userService.Authorization(Login, Password) == true)
+        //        //{
+        //        //    Debug.WriteLine("Произошел вход в аккаунт");
+        //        //}
+        //        //else
+        //        //{
+        //        //    Debug.WriteLine("Неверные входные данные");
+        //        //}
+        //        _pageService.ChangePage(new ProductsPage());
+        //    });       
+        //    },
+        //    bool () =>
+        //    {
+        //        if(string.IsNullOrWhiteSpace(Login) == true || string.IsNullOrEmpty(Password) == true)
+        //        {
+        //            return false;
+        //        }
+        //        return true;
+        //    }
+        //    );
+        //    
+
+
+
     }
 }

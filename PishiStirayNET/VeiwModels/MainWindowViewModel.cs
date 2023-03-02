@@ -11,7 +11,7 @@ namespace PishiStirayNET.VeiwModels
 
         private PageService _pageService;
 
-        public Page PageSource { get; set; }
+      
 
         #region Свойства
 
@@ -26,7 +26,7 @@ namespace PishiStirayNET.VeiwModels
 
         #endregion
 
-        public MainWindowViewModel(PageService pageService)
+        public MainWindowViewModel()
         {
            
            
