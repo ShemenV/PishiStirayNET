@@ -1,24 +1,23 @@
-﻿using DevExpress.Mvvm;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using PishiStirayNET.Services;
-using PishiStirayNET.Views.Pages;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
-    class SignInPageViewModel : ViewModelBase
+    partial class SignInPageViewModel :ObservableObject
     {
 
         private readonly UserService _userService;
         private readonly PageService _pageService;
 
         #region Свойства
-        public string Login { get; set; }
-        public string Password { get; set; }
+        [ObservableProperty]
+        public string login;
+
+        [ObservableProperty]
+        public string password;
         #endregion
 
         public SignInPageViewModel(UserService userService, PageService pageService)

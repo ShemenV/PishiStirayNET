@@ -13,10 +13,21 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <Color x:Key="secondaryGreen" >#FF76E383</Color>
+            <Color x:Key="accentGreen">#FF498C51</Color>
+
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="Blue"/>
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Primary200Foreground}"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{StaticResource secondaryGreen}"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="Red"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
+
+
             <local:DI x:Key="DI"/>
 
-            <SolidColorBrush x:Key="accentColor" Color="#FF498C51"/>
-            <SolidColorBrush x:Key="additionalColor" Color="#FF76E383"/>
+            <SolidColorBrush x:Key="accentColor" Color="{StaticResource accentGreen}"/>
+            <SolidColorBrush x:Key="additionalColor" Color="{StaticResource secondaryGreen}"/>
 
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" 
