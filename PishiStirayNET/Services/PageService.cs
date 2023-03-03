@@ -1,14 +1,17 @@
-﻿namespace PishiStirayNET.Services
+﻿using System;
+using System.Windows.Controls;
+
+namespace PishiStirayNET.Services
 {
-    class PageService
+    public class PageService
     {
-        //public event Action<Page> OnPageChanged;
+        public event Action<Page> OnPageChanged;
 
-        //public void ChangePage(Page page)
-        //{
-        //    OnPageChanged?.Invoke(page);
-        //}
+        public void ChangePage(Page page)
+        {
+            OnPageChanged?.Invoke(page);
+        }
 
-       
+
     }
 }

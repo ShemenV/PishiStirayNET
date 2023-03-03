@@ -3,12 +3,70 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:PishiStirayNET.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ProductsPage">
+      Title="ProductsPage"
+      DataContext="{Binding ProductsPageViewModel, Source={StaticResource DI}}">
+
 
     <Grid>
-        <TextBlock Text="Хи хи хи" FontSize="120"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" MinHeight="400"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                 BorderBrush="{StaticResource additionalColor}"
+                 Grid.Column="1"
+                 Margin="0,5,0,5"/>
+
+        <ListView Grid.Row="1"
+                  Grid.Column="1"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Center"
+                  Style="{StaticResource MaterialDesignCardsListBox}"
+                  ItemsSource="{Binding ProductsList}"
+                  Height="340">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Height="auto"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Image Source="{Binding ProductPhoto, 
+                            StringFormat= 'Resources/{0}'}" 
+                               Width="100"/>
+
+                        <StackPanel Margin="5,0">
+                            <TextBlock FontWeight="Bold"
+                                       Margin="2,3"
+                                       Text="{Binding ProductName}"/>
+
+                            <TextBlock Text="{Binding ProductDescription}"
+                                         Margin="2,3"/>
+
+                            <TextBlock Text="{Binding ProductManufacturer, 
+                                StringFormat='Производитель - {0}'}"/>
+
+                            <TextBlock Text="{Binding ProductCost, 
+                                StringFormat='Цена - {0}'}"/>
+
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding CurrentDiscount,
+                            StringFormat= 'Текущая скидка - {0}'}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>

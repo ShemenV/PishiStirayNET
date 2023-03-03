@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using PishiStirayNET.Data;
 using PishiStirayNET.Services;
 using PishiStirayNET.VeiwModels;
 using System.Configuration;
@@ -19,7 +18,7 @@ namespace PishiStirayNET
 
             services.AddSingleton<UserService>();
             services.AddSingleton<PageService>();
-
+            services.AddSingleton<ProductService>();   
             #endregion
 
 
@@ -27,6 +26,7 @@ namespace PishiStirayNET
 
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<SignInPageViewModel>();
+            services.AddTransient<ProductsPageViewModel>();
 
             #endregion
 
@@ -50,5 +50,6 @@ namespace PishiStirayNET
 
         public MainWindowViewModel MainWindowViewModel => _provider.GetRequiredService<MainWindowViewModel>();
         public SignInPageViewModel SignInPageViewModel => _provider.GetRequiredService<SignInPageViewModel>();
+        public ProductsPageViewModel ProductsPageViewModel => _provider.GetRequiredService<ProductsPageViewModel>();
     }
 }

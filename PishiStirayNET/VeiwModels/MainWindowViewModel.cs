@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System.ComponentModel;
 using System.Security.Policy;
+using System.Windows.Controls;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -11,14 +13,13 @@ namespace PishiStirayNET.VeiwModels
 
         private PageService _pageService;
 
-      
+
 
         #region Свойства
 
-        [ObservableProperty]
-        public string? title = "This is amazing";
 
-        
+        [ObservableProperty]
+        private Page pageSource;
 
         #endregion
 
@@ -26,10 +27,12 @@ namespace PishiStirayNET.VeiwModels
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(PageService pageService)
         {
-           
-           
+           _pageService = pageService;
+
+            _pageService.OnPageChanged += (page) => pageSource = page;
+            _pageService.ChangePage(new ProductsPage());
         }
 
     }

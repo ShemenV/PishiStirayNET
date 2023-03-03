@@ -8,10 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\A346R4.jpg" />
+    <None Remove="Resources\A543T6.jpg" />
+    <None Remove="Resources\B730E2.jpg" />
+    <None Remove="Resources\D419T7.png" />
+    <None Remove="Resources\F719R5.jpg" />
+    <None Remove="Resources\G278R6.png" />
+    <None Remove="Resources\H452A3.png" />
+    <None Remove="Resources\picture.png" />
+    <None Remove="Resources\R259E6.jpg" />
+    <None Remove="Resources\T564P5.jpg" />
+    <None Remove="Resources\А112Т4.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -20,6 +38,24 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\A346R4.jpg" />
+    <Resource Include="Resources\A543T6.jpg" />
+    <Resource Include="Resources\B730E2.jpg" />
+    <Resource Include="Resources\D419T7.png" />
+    <Resource Include="Resources\F719R5.jpg" />
+    <Resource Include="Resources\G278R6.png" />
+    <Resource Include="Resources\H452A3.png" />
+    <Resource Include="Resources\picture.png" />
+    <Resource Include="Resources\R259E6.jpg" />
+    <Resource Include="Resources\T564P5.jpg" />
+    <Resource Include="Resources\А112Т4.jpg" />
   </ItemGroup>
 
 </Project>

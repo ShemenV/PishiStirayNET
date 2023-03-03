@@ -1,5 +1,4 @@
-﻿using PishiStirayNET.Data;
-using PishiStirayNET.Models.DbEntities;
+﻿
 using System.Diagnostics;
 using System.Linq;
 
@@ -16,7 +15,7 @@ namespace PishiStirayNET.Services
 
         public bool Authorization(string userLogin, string userPassword)
         {
-            UserDB user = _trade.User.Where(user => user.UserLogin == userLogin && user.UserPassword == userPassword).SingleOrDefault();
+            User user = _trade.Users.Where(user => user.UserLogin == userLogin && user.UserPassword == userPassword).SingleOrDefault();
 
             if (user != null)
             {

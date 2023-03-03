@@ -1,6 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -14,9 +16,11 @@ namespace PishiStirayNET.VeiwModels
 
         #region Свойства
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SignInCommand))]
         public string login;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SignInCommand))]
         public string password;
         #endregion
 
@@ -27,33 +31,36 @@ namespace PishiStirayNET.VeiwModels
         }
 
 
-        //public AsyncCommand SignInCommand => new(async ()=>
-        //{           
-        //    await Task.Run(async () =>
-        //    {
-        //        //if (_userService.Authorization(Login, Password) == true)
-        //        //{
-        //        //    Debug.WriteLine("Произошел вход в аккаунт");
-        //        //}
-        //        //else
-        //        //{
-        //        //    Debug.WriteLine("Неверные входные данные");
-        //        //}
-        //        _pageService.ChangePage(new ProductsPage());
-        //    });       
-        //    },
-        //    bool () =>
-        //    {
-        //        if(string.IsNullOrWhiteSpace(Login) == true || string.IsNullOrEmpty(Password) == true)
-        //        {
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-        //    );
-        //    
 
 
+
+        [RelayCommand(CanExecute = nameof(CanSignIn))]
+        private async void SignIn()
+        {
+            await Task.Run(() =>
+            {
+                if (_userService.Authorization(Login, Password) == true)
+                {
+                    Debug.WriteLine("Произошел вход в аккаунт");
+                    _pageService.ChangePage(new ProductsPage());
+                }
+                else
+                {
+                    Debug.WriteLine("Неверные входные данные");
+                }
+              
+            });
+            Debug.WriteLine(login);
+        }
+
+        private bool CanSignIn()
+        {
+            if (string.IsNullOrWhiteSpace(login) == true || string.IsNullOrEmpty(password) == true)
+            {
+                return false;
+            }
+            return true;
+        }
 
     }
 }
