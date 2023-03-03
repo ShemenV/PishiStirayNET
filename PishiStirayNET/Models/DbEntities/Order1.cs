@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PishiStirayNET;
 
 public partial class Order1
 {
+    [Key]
     public int OrderId { get; set; }
 
     public int OrderStatus { get; set; }
 
     public DateTime OrderDeliveryDate { get; set; }
 
+    public DateTime OrderDeliveryDateEnd { get; set; }
+
     public int OrderPickupPoint { get; set; }
 
-    public int? PickUpCode { get; set; }
+    public string? Fio { get; set; }
 
-    public string? ClientName { get; set; }
-
-    public DateTime? OrderDate { get; set; }
+    public int CodePoluch { get; set; }
 
     public virtual Issuepoint OrderPickupPointNavigation { get; set; } = null!;
 

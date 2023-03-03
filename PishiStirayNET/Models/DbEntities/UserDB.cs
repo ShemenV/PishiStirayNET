@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PishiStirayNET;
 
-public partial class User
+public partial class UserDB
 {
     public int UserId { get; set; }
 

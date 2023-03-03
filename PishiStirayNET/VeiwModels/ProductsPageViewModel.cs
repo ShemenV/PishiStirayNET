@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PishiStirayNET.Models;
 using PishiStirayNET.Services;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,18 @@ namespace PishiStirayNET.VeiwModels
     {
         private readonly ProductService _productService;
 
+       
 
         [ObservableProperty]
-        private List<ProductDB> productsList;
+        private List<Product> productsList;
 
         public ProductsPageViewModel(ProductService productService)
         {
             _productService = productService;
-            
-            
 
-           productsList = _productService.GetProducts();
+
+
+            productsList = _productService.GetProducts();
         }
     }
 }

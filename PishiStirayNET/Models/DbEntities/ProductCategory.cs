@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace PishiStirayNET;
 
-public partial class Category
+public partial class ProductCategory
 {
-    public int Idcategories { get; set; }
+    public int IdCategory { get; set; }
 
-    public string? Namecategories { get; set; }
+    public string NameCategory { get; set; } = null!;
 
     public virtual ICollection<ProductDB> Products { get; } = new List<ProductDB>();
 }

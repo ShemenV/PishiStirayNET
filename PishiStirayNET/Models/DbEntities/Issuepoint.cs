@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PishiStirayNET;
 
 public partial class Issuepoint
 {
-    public int Id { get; set; }
+    [Key]
+    public int IdPunkta { get; set; }
 
-    public string? City { get; set; }
+    public int PunktIndex { get; set; }
 
-    public string? Street { get; set; }
+    public string PunktCity { get; set; } = null!;
 
-    public int? House { get; set; }
+    public string PunktStreet { get; set; } = null!;
 
-    public int? Index { get; set; }
+    public int? PunktDom { get; set; }
 
     public virtual ICollection<Order1> Order1s { get; } = new List<Order1>();
 }

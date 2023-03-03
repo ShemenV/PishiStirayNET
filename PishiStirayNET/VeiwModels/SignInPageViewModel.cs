@@ -48,7 +48,7 @@ namespace PishiStirayNET.VeiwModels
                 {
                     Debug.WriteLine("Неверные входные данные");
                 }
-              
+
             });
             Debug.WriteLine(login);
         }

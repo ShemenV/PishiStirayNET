@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Packaging;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,40 @@ namespace PishiStirayNET.Models
 {
     public class Product
     {
-        public string Article { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Manufacturer { get; set; }
+        public string? Article { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public string? Manufacturer { get; set; }
         public decimal Price { get; set; }
         public float? CurrentDiscount { get; set; }
-        public string Image { get; set; }
+
+        private string _image;
+
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+               
+                if(value== null || string.IsNullOrWhiteSpace(value))
+                {
+                    _image = "picture.png";
+                    return;
+                }
+                _image = value;
+            }
+        }
+
+        
+
+        public string ImageUrl { 
+            get
+            {
+                return Path.GetFullPath(@$"Resources\{Image}");
+            }
+        }
     }
 }
