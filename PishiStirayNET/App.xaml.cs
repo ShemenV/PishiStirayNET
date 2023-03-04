@@ -9,8 +9,8 @@ namespace PishiStirayNET
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            DI.Init();
             base.OnStartup(e);
+            DI.Init();
         }
     }
 }

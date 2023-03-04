@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PishiStirayNET;
 
 public partial class ProductDB
 {
-    [Key] 
+    [Key]
     public string ProductArticleNumber { get; set; } = null!;
 
     public string ProductName { get; set; } = null!;

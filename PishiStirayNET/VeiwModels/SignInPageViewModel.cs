@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
-    partial class SignInPageViewModel :ObservableObject
+    partial class SignInPageViewModel : ObservableObject
     {
 
         private readonly UserService _userService;
@@ -27,7 +27,7 @@ namespace PishiStirayNET.VeiwModels
         public SignInPageViewModel(UserService userService, PageService pageService)
         {
             _userService = userService;
-            _pageService = pageService; 
+            _pageService = pageService;
         }
 
 
@@ -39,7 +39,7 @@ namespace PishiStirayNET.VeiwModels
         {
             await Task.Run(() =>
             {
-                if (_userService.Authorization(Login, Password) == true)
+                if (_userService.Authorization(login, password) == true)
                 {
                     Debug.WriteLine("Произошел вход в аккаунт");
                     _pageService.ChangePage(new ProductsPage());

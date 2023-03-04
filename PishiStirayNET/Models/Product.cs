@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Packaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace PishiStirayNET.Models
 {
@@ -27,8 +21,8 @@ namespace PishiStirayNET.Models
             }
             set
             {
-               
-                if(value== null || string.IsNullOrWhiteSpace(value))
+
+                if (value == null || string.IsNullOrWhiteSpace(value))
                 {
                     _image = "picture.png";
                     return;
@@ -37,13 +31,16 @@ namespace PishiStirayNET.Models
             }
         }
 
-        
 
-        public string ImageUrl { 
+
+        public string ImageUrl
+        {
             get
             {
                 return Path.GetFullPath(@$"Resources\{Image}");
             }
         }
+
+
     }
 }

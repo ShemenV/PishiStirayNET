@@ -2,8 +2,6 @@
 
 using PishiStirayNET.Services;
 using PishiStirayNET.Views.Pages;
-using System.ComponentModel;
-using System.Security.Policy;
 using System.Windows.Controls;
 
 namespace PishiStirayNET.VeiwModels
@@ -29,7 +27,7 @@ namespace PishiStirayNET.VeiwModels
 
         public MainWindowViewModel(PageService pageService)
         {
-           _pageService = pageService;
+            _pageService = pageService;
 
             _pageService.OnPageChanged += (page) => pageSource = page;
             _pageService.ChangePage(new ProductsPage());

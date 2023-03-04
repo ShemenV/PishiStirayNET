@@ -19,7 +19,7 @@ namespace PishiStirayNET
 
             services.AddSingleton<UserService>();
             services.AddSingleton<PageService>();
-            services.AddSingleton<ProductService>();   
+            services.AddSingleton<ProductService>();
             #endregion
 
 
@@ -36,8 +36,12 @@ namespace PishiStirayNET
             services.AddDbContext<TradeContext>(options =>
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["TradeDatabase"].ConnectionString;
-                options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            });
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            }, ServiceLifetime.Singleton);
+
+
+
+
 
             #endregion
 

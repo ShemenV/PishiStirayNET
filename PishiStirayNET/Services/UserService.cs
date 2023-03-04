@@ -1,6 +1,5 @@
 ﻿
 using PishiStirayNET.Data;
-using PishiStirayNET.Models;
 using System.Diagnostics;
 using System.Linq;
 

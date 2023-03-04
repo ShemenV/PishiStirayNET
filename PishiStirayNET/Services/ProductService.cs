@@ -1,11 +1,8 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
@@ -20,29 +17,32 @@ namespace PishiStirayNET.Services
         }
 
 
-        public List<Models.Product> GetProducts()
+        public async Task<List<Models.Product>> GetProductsAsync()
         {
-            List<ProductDB> productDBs = _context.Products.ToList();
-            foreach(var productDB in productDBs)
-            {
-                Debug.WriteLine(productDB.ProductManufacturerNavigation.Name);
-            }
+            List<Models.Product> products = new();
+            var productDBs = _context.Products.ToList();
+            await _context.Manufacturers.ToListAsync();
 
-            List<Models.Product> products = new List<Models.Product>();
-
-            foreach (var product in productDBs)
+            await Task.Run(() =>
             {
-                products.Add(new Models.Product
+                Debug.WriteLine(productDBs.Count);
+                foreach (var product in productDBs)
                 {
-                    Article = product.ProductArticleNumber,
-                    CurrentDiscount = product.CurrentDiscount,
-                    Description = product.ProductDescription,
-                    Image = product.ProductPhoto,
-                    Price = product.ProductCost,
-                    Manufacturer = product.ProductManufacturerNavigation.Name,
-                    Title = product.ProductName
-                });
-            }
+                    products.Add(new Models.Product
+                    {
+                        Article = product.ProductArticleNumber,
+                        CurrentDiscount = product.CurrentDiscount,
+                        Description = product.ProductDescription,
+                        Image = product.ProductPhoto,
+                        Price = product.ProductCost,
+                        Manufacturer = product.ProductManufacturerNavigation.Name,
+                        Title = product.ProductName
+                    });
+                }
+
+            });
+
+            Debug.Write(products.Count);
             return products;
         }
     }

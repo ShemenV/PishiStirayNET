@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace PishiStirayNET;
+﻿namespace PishiStirayNET;
 
 public partial class Orderproduct
 {
