@@ -20,13 +20,13 @@ namespace PishiStirayNET.Services
         public async Task<List<Models.Product>> GetProductsAsync()
         {
             List<Models.Product> products = new();
-            var productDBs = _context.Products.ToList();
+            List<ProductDB> productDBs = _context.Products.ToList();
             await _context.Manufacturers.ToListAsync();
 
             await Task.Run(() =>
             {
                 Debug.WriteLine(productDBs.Count);
-                foreach (var product in productDBs)
+                foreach (ProductDB product in productDBs)
                 {
                     products.Add(new Models.Product
                     {
@@ -34,7 +34,7 @@ namespace PishiStirayNET.Services
                         CurrentDiscount = product.CurrentDiscount,
                         Description = product.ProductDescription,
                         Image = product.ProductPhoto,
-                        Price = product.ProductCost,
+                        Price = ((float)product.ProductCost),
                         Manufacturer = product.ProductManufacturerNavigation.Name,
                         Title = product.ProductName
                     });

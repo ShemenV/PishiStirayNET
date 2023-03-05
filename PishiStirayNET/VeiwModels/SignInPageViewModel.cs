@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Services;
 using PishiStirayNET.Views.Pages;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -35,22 +34,19 @@ namespace PishiStirayNET.VeiwModels
 
 
         [RelayCommand(CanExecute = nameof(CanSignIn))]
-        private async void SignIn()
+        private void SignIn()
         {
-            await Task.Run(() =>
-            {
-                if (_userService.Authorization(login, password) == true)
-                {
-                    Debug.WriteLine("Произошел вход в аккаунт");
-                    _pageService.ChangePage(new ProductsPage());
-                }
-                else
-                {
-                    Debug.WriteLine("Неверные входные данные");
-                }
 
-            });
-            Debug.WriteLine(login);
+            if (_userService.Authorization(login, password) == true)
+            {
+                Debug.WriteLine("Произошел вход в аккаунт");
+                _pageService.ChangePage(new ProductsPage());
+            }
+            else
+            {
+                Debug.WriteLine("Неверные входные данные");
+            }
+
         }
 
         private bool CanSignIn()
@@ -61,6 +57,11 @@ namespace PishiStirayNET.VeiwModels
             }
             return true;
         }
+
+
+        [RelayCommand]
+        private void GoToProductsPage() => _pageService.ChangePage(new ProductsPage());
+
 
     }
 }

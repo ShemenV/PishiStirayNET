@@ -9,7 +9,7 @@ namespace PishiStirayNET.VeiwModels
     public partial class MainWindowViewModel : ObservableObject
     {
 
-        private PageService _pageService;
+        private readonly PageService _pageService;
 
 
 
@@ -29,8 +29,8 @@ namespace PishiStirayNET.VeiwModels
         {
             _pageService = pageService;
 
-            _pageService.OnPageChanged += (page) => pageSource = page;
-            _pageService.ChangePage(new ProductsPage());
+            _pageService.OnPageChanged += (page) => PageSource = page;
+            _pageService.ChangePage(new SignInPage());
         }
 
     }

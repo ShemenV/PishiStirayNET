@@ -36,7 +36,7 @@ namespace PishiStirayNET
             services.AddDbContext<TradeContext>(options =>
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["TradeDatabase"].ConnectionString;
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+                options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             }, ServiceLifetime.Singleton);
 
 

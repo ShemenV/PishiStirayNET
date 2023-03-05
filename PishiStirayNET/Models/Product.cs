@@ -8,7 +8,8 @@ namespace PishiStirayNET.Models
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? Manufacturer { get; set; }
-        public decimal Price { get; set; }
+        public float? Price { get; set; }
+
         public float? CurrentDiscount { get; set; }
 
         private string _image;
@@ -31,8 +32,6 @@ namespace PishiStirayNET.Models
             }
         }
 
-
-
         public string ImageUrl
         {
             get
@@ -41,6 +40,26 @@ namespace PishiStirayNET.Models
             }
         }
 
+
+        public float? NewPrice
+        {
+            get
+            {
+                if (CurrentDiscount != 0)
+                {
+                    return Price - (Price * (CurrentDiscount / 100));
+                }
+                return 0;
+            }
+        }
+
+        public bool HaveDiscount
+        {
+            get
+            {
+                return NewPrice != null;
+            }
+        }
 
     }
 }

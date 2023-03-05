@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Enums\" />
+    <Folder Include="Views\UserControls\" />
   </ItemGroup>
 
   <ItemGroup>

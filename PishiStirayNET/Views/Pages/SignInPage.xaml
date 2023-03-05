@@ -27,6 +27,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Text="Авторизация"
@@ -50,11 +51,17 @@
                      BorderBrush="{StaticResource additionalColor}"/>
 
             <Button Grid.Row="3"
-                    Margin="30,15"
+                    Margin="30,10"
                     Content="Войти"
                     Background="{StaticResource additionalColor}"
                     Foreground="White"
-                    Command="{Binding SignInCommand,IsAsync=True}"/>
+                    Command="{Binding SignInCommand}"/>
+
+            <Button Grid.Row="4"
+                    Background="White"
+                    Margin="30,5"
+                    Content="Войти как гость"
+                    Command="{Binding GoToProductsPageCommand}"/>
         </Grid>
 
 

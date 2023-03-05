@@ -67,16 +67,54 @@
            
 
         </StackPanel>
-       
+
+        <TextBlock Grid.Row="0"
+                   Grid.Column="2"
+                   Text="Количество товаров"
+                   FontSize="13"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,40"/>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0"
+                   Grid.Column="2"
+                    HorizontalAlignment="Center">
+            
+            <TextBlock 
+                    Text="{Binding CurrentProductsCount}"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,5,10"/>
+            
+            <TextBlock 
+                   Text="/"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,10"/>
+
+            <TextBlock Grid.Row="0"
+                   Grid.Column="2"
+                   Text="{Binding TotalProductsCount}"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="5,0,0,10"/>
+            
+        </StackPanel>
+        
 
         <ListView Grid.Row="1"
                   Grid.Column="0"
                   VerticalAlignment="Top"
-                x:Name="mainListView"
-                 Grid.ColumnSpan="3"
+                  x:Name="mainListView"
+                  Grid.ColumnSpan="3"
+                  Margin="0,10,0,0"
                   HorizontalContentAlignment="Center"
                   ItemsSource="{Binding ProductsList}"
-                  Height="{Binding ActualHeight, ElementName=ProductPage, Mode=OneWay}">
+                  Height="{Binding ActualHeight, ElementName=ProductPage, Mode=OneWay, Converter={converters:SubtractConverter Value=100}}">
 
 
 
@@ -100,9 +138,9 @@
                                 VerticalAlignment="Center"
                           HorizontalAlignment="Stretch" >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="2.5*"/>
-                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="0.7*"/>
                             </Grid.ColumnDefinitions>
 
                             <Image 
@@ -123,21 +161,68 @@
 
                                 <TextBlock Text="{Binding Description}"
                                        TextWrapping="Wrap"
-                                         Margin="2,3"
-                                       Width="260"/>
+                                         
+                                       Margin="2,3,4,3"/>
 
                                 <TextBlock Text="{Binding Manufacturer, 
-                                StringFormat='Производитель - {0}'}"/>
+                                StringFormat='Производитель - {0}'}"
+                                            Margin="0,7"/>
 
-                                <TextBlock Text="{Binding Price, 
-                                StringFormat='Цена - {0}'}"/>
+                                
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,7">
 
+                                    <TextBlock Text="Цена - "/>
+
+                                    <TextBlock Text="{Binding Price}"
+                                          >
+                                        <TextBlock.Style>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding HaveDiscount}"
+                                                                 Value="True">
+                                                        <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                                <Setter Property="FontFamily" 
+                                                        Value="Comic Sans MS"/>
+
+                                                <Setter Property="Foreground"
+                                                 Value="{StaticResource accentColor}"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+
+                                    <TextBlock 
+                                        x:Name="newPriceTextBlock"
+                                        Text="{Binding NewPrice}"
+                                           Margin="5,0"/>
+
+                                </StackPanel>
+                              
                             </StackPanel>
 
                             <TextBlock Text="{Binding CurrentDiscount,
-                            StringFormat= 'Текущая скидка - {0}'}"
+                            StringFormat= 'Cкидка - {0}%'}"
                                    Grid.Column="2"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center">
+                                
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HaveDiscount}"
+                                                                 Value="False">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                        <Setter Property="FontFamily" 
+                                                        Value="Comic Sans MS"/>
+
+                                        <Setter Property="Foreground"
+                                                 Value="{StaticResource accentColor}"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </Grid>
                     </Border>
                     

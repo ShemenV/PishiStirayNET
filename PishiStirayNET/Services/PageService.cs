@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Controls;
 
 namespace PishiStirayNET.Services
@@ -9,6 +10,7 @@ namespace PishiStirayNET.Services
 
         public void ChangePage(Page page)
         {
+            Debug.WriteLine("Page changed");
             OnPageChanged?.Invoke(page);
         }
 

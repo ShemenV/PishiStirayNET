@@ -29,7 +29,7 @@
             <SolidColorBrush x:Key="accentColor" Color="{StaticResource accentGreen}"/>
             <SolidColorBrush x:Key="additionalColor" Color="{StaticResource secondaryGreen}"/>
 
-            <Style TargetType="TextBlock">
+            <Style TargetType="{x:Type TextBlock}">
                 <Setter Property="FontFamily" 
                     Value="Comic Sans MS"
                     />
@@ -42,6 +42,14 @@
                 <Setter Property="materialDesign:HintAssist.FontFamily" Value="Comic Sans MS"/>
                 <Setter Property="BorderBrush" Value="{StaticResource additionalColor}"/>
                 
+            </Style>
+
+            <Style TargetType="{x:Type TextBlock}" x:Key="textBlockStyle">
+                <Setter Property="FontFamily" 
+                    Value="Comic Sans MS"
+                    />
+                <Setter Property="Foreground"
+                    Value="{StaticResource accentColor}"/>
             </Style>
         </ResourceDictionary>
 

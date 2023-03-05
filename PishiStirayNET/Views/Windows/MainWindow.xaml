@@ -10,5 +10,6 @@
         DataContext="{Binding MainWindowViewModel, Source={StaticResource DI}}"
         Width="800">
 
-    <Frame Content="{Binding PageSource}"/>
+    <Frame Content="{Binding PageSource}"
+           NavigationUIVisibility="Hidden"/>
 </Window>
