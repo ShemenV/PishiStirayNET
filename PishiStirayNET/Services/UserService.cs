@@ -1,5 +1,6 @@
 ﻿
 using PishiStirayNET.Data;
+using PishiStirayNET.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
 
@@ -20,7 +21,18 @@ namespace PishiStirayNET.Services
 
             if (user != null)
             {
-                Debug.WriteLine("not null");
+
+                CurrentUser.User = new Models.User
+                {
+                    UserID = user.UserId,
+                    UserName = user.UserName,
+                    UserLogin = user.UserLogin,
+                    UserPassword = user.UserPassword,
+                    UserPatronymic = user.UserPatronymic,
+                    UserRole = user.UserRoleNavigation.RoleName,
+                    UserSurname = user.UserSurname
+                };
+
                 return true;
             }
             Debug.WriteLine("null");
