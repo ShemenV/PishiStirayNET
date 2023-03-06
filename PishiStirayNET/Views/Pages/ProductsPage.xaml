@@ -36,7 +36,7 @@
                  BorderBrush="{StaticResource additionalColor}"
                  Grid.Column="1"
                  Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 Margin="0,5,0,5"/>
+                 Margin="0,5,0,5" TextChanged="TextBox_TextChanged"/>
 
             <Grid
                         >
@@ -145,6 +145,7 @@
                             MaxWidth="600"
                             MinWidth="600"
                             Width="610"
+                            Background="{Binding CurrentDiscount, Converter = {converters:IntToBrushConverter}}"
                             BorderBrush="{StaticResource additionalColor}">
                         <Grid Height="auto"
                                 VerticalAlignment="Center"
