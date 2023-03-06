@@ -28,6 +28,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Text="Авторизация"
@@ -50,18 +51,24 @@
                      materialDesign:HintAssist.Hint="Пароль"
                      BorderBrush="{StaticResource additionalColor}"/>
 
-            <Button Grid.Row="3"
+            <TextBlock Foreground="Red"
+                       Text="{Binding ErrorMessage}"
+                       Grid.Row="3"
+                       TextAlignment="Center"
+                       FontFamily="Comic Sans MS"/>
+
+            <Button Grid.Row="4"
                     Margin="30,10"
                     Content="Войти"
                     Background="{StaticResource additionalColor}"
                     Foreground="White"
-                    Command="{Binding SignInCommand}"/>
+                    Command="{Binding SignInCommand, IsAsync=True}"/>
 
-            <Button Grid.Row="4"
+            <Button Grid.Row="5"
                     Background="White"
                     Margin="30,5"
                     Content="Войти как гость"
-                    Command="{Binding GoToProductsPageCommand}"/>
+                    Command="{Binding GoToProductsPageCommand}" Cursor="Hand"/>
         </Grid>
 
 

@@ -8,8 +8,8 @@
         mc:Ignorable="d"
         Height="450" 
         DataContext="{Binding MainWindowViewModel, Source={StaticResource DI}}"
-        Width="800">
+        Width="800" Icon="/Views/Windows/logo.png">
 
     <Frame Content="{Binding PageSource}"
-           NavigationUIVisibility="Hidden"/>
+           NavigationUIVisibility="Visible"/>
 </Window>

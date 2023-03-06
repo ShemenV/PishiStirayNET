@@ -124,11 +124,6 @@ namespace PishiStirayNET.VeiwModels
 
             ProductsList = products;
 
-            foreach (var product in products)
-            {
-
-            }
-
             CurrentProductsCount = products.Count;
         }
     }

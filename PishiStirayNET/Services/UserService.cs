@@ -1,8 +1,10 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
 using PishiStirayNET.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
 {
@@ -15,28 +17,29 @@ namespace PishiStirayNET.Services
             _trade = trade;
         }
 
-        public bool Authorization(string userLogin, string userPassword)
+        public async Task<bool> Authorization(string userLogin, string userPassword)
         {
-            UserDB user = _trade.Users.Where(user => user.UserLogin == userLogin && user.UserPassword == userPassword).SingleOrDefault();
+            UserDB user = await _trade.Users.Where(user => user.UserLogin == userLogin && user.UserPassword == userPassword).SingleOrDefaultAsync();
 
-            if (user != null)
-            {
-
-                CurrentUser.User = new Models.User
+           
+                if (user != null)
                 {
-                    UserID = user.UserId,
-                    UserName = user.UserName,
-                    UserLogin = user.UserLogin,
-                    UserPassword = user.UserPassword,
-                    UserPatronymic = user.UserPatronymic,
-                    UserRole = user.UserRoleNavigation.RoleName,
-                    UserSurname = user.UserSurname
-                };
 
-                return true;
-            }
-            Debug.WriteLine("null");
-            return false;
+                    CurrentUser.User = new Models.User
+                    {
+                        UserID = user.UserId,
+                        UserName = user.UserName,
+                        UserLogin = user.UserLogin,
+                        UserPassword = user.UserPassword,
+                        UserPatronymic = user.UserPatronymic,
+                        UserRole = user.UserRoleNavigation.RoleName,
+                        UserSurname = user.UserSurname
+                    };
+
+                   return true;
+                }
+                return false;
+            
         }
     }
 }
