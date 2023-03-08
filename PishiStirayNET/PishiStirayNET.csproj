@@ -16,10 +16,15 @@
     <None Remove="Resources\F719R5.jpg" />
     <None Remove="Resources\G278R6.png" />
     <None Remove="Resources\H452A3.png" />
+    <None Remove="Resources\Icons\logo.png" />
+    <None Remove="Resources\Icons\order.png" />
+    <None Remove="Resources\Icons\order2.png" />
     <None Remove="Resources\picture.png" />
     <None Remove="Resources\R259E6.jpg" />
     <None Remove="Resources\T564P5.jpg" />
     <None Remove="Resources\А112Т4.jpg" />
+    <None Remove="Views\Pages\order.png" />
+    <None Remove="Views\Pages\order2.png" />
     <None Remove="Views\Windows\logo.png" />
   </ItemGroup>
 
@@ -70,6 +75,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\icon.ico" />
+    <Content Include="Resources\Icons\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\order.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\order2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\picture.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -85,6 +99,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Pages\order.png" />
+    <Resource Include="Views\Pages\order2.png" />
     <Resource Include="Views\Windows\logo.png" />
   </ItemGroup>
 

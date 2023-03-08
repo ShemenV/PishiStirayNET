@@ -76,7 +76,7 @@
 
                 <StackPanel Orientation="Vertical"
                    Grid.Column="2"
-                    HorizontalAlignment="Center"
+                    HorizontalAlignment="Right"
                     >
                     <TextBlock Grid.Row="1"
                    Grid.Column="2"
@@ -242,6 +242,19 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}"
+                Grid.Row="1"
+                
+                BorderBrush="{StaticResource additionalColor}"
+               Background="{StaticResource additionalColor}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Margin="0,0,20,60" Cursor="">
+            <Button.Content >
+                <Image Source="/Resources/Icons/order2.png"
+                       Margin="13"/>
+            </Button.Content>
+        </Button>
 
     </Grid>
 </Page>
