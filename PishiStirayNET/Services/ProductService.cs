@@ -45,6 +45,8 @@ namespace PishiStirayNET.Services
 
             });
 
+
+
             Debug.Write(products.Count);
             return products;
         }
