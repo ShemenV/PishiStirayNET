@@ -19,104 +19,104 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid Margin="30,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="0"
-                    Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  BorderBrush="{StaticResource additionalColor}"
-                 Grid.Column="1"
+                 Grid.Column="0"
+                     Grid.Row="0"
                  Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="0,5,0,5" TextChanged="TextBox_TextChanged"/>
 
-            <Grid
-                        >
+            <usercontrols:AuthorizedUserUserControl Grid.Column="1"
+                                                Margin="5,10,5,5"
+                                                    Grid.RowSpan="2"/>
+
+
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                
-                <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
                       materialDesign:HintAssist.Hint="Сорртировка по цене"
                           MinWidth="200"
                           HorizontalAlignment="Left"
                           Grid.Column="0"
                           SelectedItem="{Binding SelectedOrder}"
-                          ItemsSource="{Binding OrderList}">
-                  
-                </ComboBox>
-                
-                <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                          ItemsSource="{Binding OrderList}"
+                          Margin="0,0,20,0">
+
+                    </ComboBox>
+
+                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
                           HorizontalAlignment="Left"
                           MinWidth="200"
                           SelectedItem="{Binding SelectedFilter}"
                           ItemsSource="{Binding FiltersList}"
-                          Grid.Column="1"
+                          Grid.Column="0"
                       materialDesign:HintAssist.Hint="Фильтрация по скидке">
-                   
-                </ComboBox>
-            </Grid>
-           
 
-        </StackPanel>
+                    </ComboBox>
+                </StackPanel>
+               
 
-
-        <usercontrols:AuthorizedUserUserControl Grid.Column="2"
-                                                Margin="5,20,5,10"/>
-
-
-        <StackPanel Orientation="Vertical"
-                    Grid.Row="1"
+                <StackPanel Orientation="Vertical"
                    Grid.Column="2"
                     HorizontalAlignment="Center"
                     >
-            <TextBlock Grid.Row="1"
+                    <TextBlock Grid.Row="1"
                    Grid.Column="2"
                    Text="Количество товаров"
                    FontSize="13"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
-                   Margin="0,0,0,10"/>
+                   Margin="0,0,0,0"/>
 
-            <StackPanel Orientation="Horizontal"
+                    <StackPanel Orientation="Horizontal"
                     
                     HorizontalAlignment="Center"
                     >
 
-                <TextBlock 
+                        <TextBlock 
                     Text="{Binding CurrentProductsCount}"
-                   FontSize="20"
+                   FontSize="14"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
-                   Margin="0,0,5,10"
+                   Margin="0,0,5,0"
                 />
-            
-            <TextBlock 
+
+                        <TextBlock 
                    Text="/"
-                   FontSize="20"
+                   FontSize="14"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
-                   Margin="0,0,0,10"/>
+                   Margin="0,0,0,0"/>
 
-            <TextBlock Grid.Row="0"
+                        <TextBlock Grid.Row="0"
                    Grid.Column="2"
                    Text="{Binding TotalProductsCount}"
-                   FontSize="20"
+                   FontSize="14"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
-                   Margin="5,0,0,10"/>
-            </StackPanel>
-        </StackPanel>
-        
+                   Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
 
         <ListView Grid.Row="1"
                   Grid.Column="0"
@@ -142,8 +142,8 @@
                     <Border Margin="10,10"
                             BorderThickness="3"
                             Padding="10,0"
-                            MaxWidth="600"
-                            MinWidth="600"
+                            MaxWidth="590"
+                            MinWidth="570"
                             Width="610"
                             Background="{Binding CurrentDiscount, Converter = {converters:IntToBrushConverter}}"
                             BorderBrush="{StaticResource additionalColor}">
