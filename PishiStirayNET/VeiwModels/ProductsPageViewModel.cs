@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,6 +13,9 @@ namespace PishiStirayNET.VeiwModels
     public partial class ProductsPageViewModel : ObservableObject
     {
         private readonly ProductService _productService;
+        private readonly PageService _pageService;
+
+        #region Свойства
 
         [ObservableProperty]
         private string? searchQuery;
@@ -35,7 +41,11 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private List<Product> productsList;
 
+        [ObservableProperty]
+        private Product selectedProduct;
 
+
+        #region Changed методы
         partial void OnSearchQueryChanged(string? value)
         {
             UpdateProductsList();
@@ -50,13 +60,16 @@ namespace PishiStirayNET.VeiwModels
         {
             UpdateProductsList();
         }
+        #endregion
+
+        #endregion
 
 
 
-
-        public ProductsPageViewModel(ProductService productService)
+        public ProductsPageViewModel(ProductService productService, PageService pageService)
         {
             _productService = productService;
+            _pageService = pageService;
 
             Debug.WriteLine("ProductsPageViewMode created");
 
@@ -125,6 +138,23 @@ namespace PishiStirayNET.VeiwModels
             ProductsList = products;
 
             CurrentProductsCount = products.Count;
+        }
+
+
+        [RelayCommand]
+        private void AddProductToCart()
+        {
+            if (SelectedProduct != null)
+            {
+                Cart.CartProductList.Add(SelectedProduct);
+            }
+        }
+
+
+        [RelayCommand]
+        private void GoToCart()
+        {
+            _pageService.ChangePage(new CartPage());
         }
     }
 }
