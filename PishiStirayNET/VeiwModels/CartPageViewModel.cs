@@ -9,7 +9,7 @@ namespace PishiStirayNET.VeiwModels
     {
 
         [ObservableProperty]
-        private List<Product> cartProductsList;
+        private List<CartItem> cartProductsList;
 
 
         public CartPageViewModel()

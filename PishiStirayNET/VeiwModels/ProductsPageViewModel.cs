@@ -146,7 +146,20 @@ namespace PishiStirayNET.VeiwModels
         {
             if (SelectedProduct != null)
             {
-                Cart.CartProductList.Add(SelectedProduct);
+                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Article == SelectedProduct.Article);
+                if (cartItem == null)
+                {
+                    Cart.CartProductList.Add(new CartItem
+                    {
+                        Article = SelectedProduct.Article
+                    });
+                }
+                else
+                {
+                    cartItem.Count++;
+                    Debug.WriteLine(Cart.CartProductList.IndexOf(cartItem));
+                }
+
             }
         }
 
