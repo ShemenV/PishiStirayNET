@@ -64,9 +64,9 @@
                          >
                                 <TextBlock FontWeight="Bold"
                                        Margin="2,3"
-                                       Text="{Binding Title}"/>
+                                       Text="{Binding Article}"/>
 
-                                <TextBlock Text="{Binding Description}"
+                                <TextBlock Text="{Binding Count}"
                                        TextWrapping="Wrap"
                                          
                                        Margin="2,3,4,3"/>

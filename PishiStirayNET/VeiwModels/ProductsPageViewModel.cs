@@ -151,7 +151,9 @@ namespace PishiStirayNET.VeiwModels
                 {
                     Cart.CartProductList.Add(new CartItem
                     {
-                        Article = SelectedProduct.Article
+                        Article = SelectedProduct.Article,
+                        Count = 1
+                       
                     });
                 }
                 else

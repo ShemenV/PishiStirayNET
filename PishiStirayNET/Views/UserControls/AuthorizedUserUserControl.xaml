@@ -36,6 +36,7 @@
            
             <TextBlock Text="{Binding Role}"
                        Margin="0,2"
+                       FontSize="14"
                       FontWeight="Bold"/>
         </StackPanel>
 
