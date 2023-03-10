@@ -261,6 +261,7 @@
                 BorderBrush="{StaticResource additionalColor}"
                Background="{StaticResource additionalColor}"
                 HorizontalAlignment="Right"
+                Visibility="{Binding CartVisibility}"
                 Command="{Binding GoToCartCommand}"
                 VerticalAlignment="Bottom" Margin="0,0,20,60" Cursor="">
             <Button.Content >

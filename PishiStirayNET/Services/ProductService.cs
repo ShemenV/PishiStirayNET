@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
+using PishiStirayNET.Data.DbEntities;
+using PishiStirayNET.Infrastructure;
+using PishiStirayNET.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
@@ -50,25 +54,25 @@ namespace PishiStirayNET.Services
 
 
 
-        //public async Task<List<Product>> GetProductFromCartAsync()
-        //{
-        //    List<Product> cartProducts = new();
-        //    List<Product> products = await GetProductsAsync();
+        public async Task<List<Product>> GetProductFromCartAsync()
+        {
+            List<Product> cartProducts = new();
+            List<Product> products = await GetProductsAsync();
 
-        //    await Task.Run(() =>
-        //    {
-        //        foreach (Product product in products)
-        //        {
-        //            CartItem? cartItem = Cart.CartProductList.Where(i => i.Article == product.Article).FirstOrDefault();
+            await Task.Run(() =>
+            {
+                foreach (Product product in products)
+                {
+                    CartItem? cartItem = Cart.CartProductList.Where(i => i.Product.Article == product.Article).FirstOrDefault();
 
-        //            if(cartItem != null)
-        //            {
+                    if (cartItem != null)
+                    {
 
-        //            }
-        //        }
-        //    });
+                    }
+                }
+            });
 
-        //    return cartProducts;
-        //}
+            return cartProducts;
+        }
     }
 }

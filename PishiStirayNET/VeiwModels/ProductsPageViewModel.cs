@@ -7,6 +7,7 @@ using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -44,6 +45,8 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private Product selectedProduct;
 
+        [ObservableProperty]
+        private Visibility cartVisibility = Visibility.Visible;
 
         #region Changed методы
         partial void OnSearchQueryChanged(string? value)
@@ -146,13 +149,13 @@ namespace PishiStirayNET.VeiwModels
         {
             if (SelectedProduct != null)
             {
-                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Article == SelectedProduct.Article);
+                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Product.Article == SelectedProduct.Article);
                 if (cartItem == null)
                 {
                     Cart.CartProductList.Add(new CartItem
                     {
-                        Article = SelectedProduct.Article,
-                        Count = 1
+                        Product = SelectedProduct,
+                       Count = 1
                        
                     });
                 }
@@ -165,6 +168,7 @@ namespace PishiStirayNET.VeiwModels
             }
         }
 
+      
 
         [RelayCommand]
         private void GoToCart()

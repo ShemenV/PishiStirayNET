@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PishiStirayNET.Data.DbEntities;
 
 namespace PishiStirayNET.Data;
 

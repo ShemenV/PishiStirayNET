@@ -1,8 +1,12 @@
-﻿namespace PishiStirayNET.Models
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace PishiStirayNET.Models
 {
-    public class CartItem
+    public partial class CartItem: ObservableObject
     {
-        public string? Article { get; set; }
-        public int Count { get; set; }
+        public Product Product { get; set; }
+
+        [ObservableProperty]
+        private int count;
     }
 }

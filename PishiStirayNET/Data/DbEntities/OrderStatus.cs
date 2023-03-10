@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PishiStirayNET;
+namespace PishiStirayNET.Data.DbEntities;
 
 public partial class OrderStatus
 {

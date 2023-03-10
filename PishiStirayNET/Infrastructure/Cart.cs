@@ -1,10 +1,11 @@
 ﻿using PishiStirayNET.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PishiStirayNET.Infrastructure
 {
     public static class Cart
     {
-        public static List<CartItem> CartProductList { get; set; } = new();
+        public static ObservableCollection<CartItem> CartProductList { get; set; } = new();
     }
 }

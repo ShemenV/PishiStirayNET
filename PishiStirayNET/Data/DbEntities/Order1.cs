@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace PishiStirayNET;
+namespace PishiStirayNET.Data.DbEntities;
 
 public partial class Order1
 {

@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
+using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
