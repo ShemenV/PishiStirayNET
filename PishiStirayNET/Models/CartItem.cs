@@ -2,9 +2,10 @@
 
 namespace PishiStirayNET.Models
 {
-    public partial class CartItem: ObservableObject
+    public partial class CartItem : ObservableObject
     {
-        public Product Product { get; set; }
+        [ObservableProperty]
+        private Product product;
 
         [ObservableProperty]
         private int count;

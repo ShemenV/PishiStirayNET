@@ -27,7 +27,7 @@ public partial class ProductDB
     public int UnitOfMeasurement { get; set; }
 
     public int Delivery { get; set; }
-   
+
 
     public int? ProductDiscountAmount { get; set; }
 
@@ -41,7 +41,4 @@ public partial class ProductDB
 
     public virtual Unit UnitOfMeasurementNavigation { get; set; } = null!;
 
-
-
-    public int FRFFrfrfr { get; set; }
 }

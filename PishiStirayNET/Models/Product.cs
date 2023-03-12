@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Windows.Media;
 
 namespace PishiStirayNET.Models
 {
@@ -13,25 +12,10 @@ namespace PishiStirayNET.Models
 
         public float? CurrentDiscount { get; set; }
 
-        private string _image;
 
-        public string Image
-        {
-            get
-            {
-                return _image;
-            }
-            set
-            {
 
-                if (value == null || string.IsNullOrWhiteSpace(value))
-                {
-                    _image = "picture.png";
-                    return;
-                }
-                _image = value;
-            }
-        }
+        public string Image { get; set; }
+
 
         public string ImageUrl
         {

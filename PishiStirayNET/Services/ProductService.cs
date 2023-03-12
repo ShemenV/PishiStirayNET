@@ -37,10 +37,12 @@ namespace PishiStirayNET.Services
                         Article = product.ProductArticleNumber,
                         CurrentDiscount = product.CurrentDiscount,
                         Description = product.ProductDescription,
-                        Image = product.ProductPhoto,
+                        Image = (product.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductPhoto) == true) ? "picture.png" : product.ProductPhoto,
                         Price = ((float)product.ProductCost),
                         Manufacturer = product.ProductManufacturerNavigation.Name,
-                        Title = product.ProductName
+                        Title = product.ProductName,
+
+
                     });
                 }
 

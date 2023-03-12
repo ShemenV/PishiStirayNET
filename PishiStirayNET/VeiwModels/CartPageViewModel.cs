@@ -3,10 +3,9 @@ using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Printing;
+using System.Linq;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -15,13 +14,20 @@ namespace PishiStirayNET.VeiwModels
         private readonly ProductService _productService;
 
         [ObservableProperty]
+
         private ObservableCollection<CartItem>? cartProductsList;
 
         [ObservableProperty]
         private CartItem? selectedCartItem;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TotalCount))]
         private int? count;
+
+        public int? TotalCount
+        {
+            get => CartProductsList.Sum(item => item.Count);
+        }
 
         partial void OnCountChanged(int? value)
         {
@@ -29,17 +35,23 @@ namespace PishiStirayNET.VeiwModels
             if (Count == 0)
             {
                 CartProductsList.Remove(SelectedCartItem);
+
             }
+
         }
 
         partial void OnSelectedCartItemChanged(CartItem? value)
         {
-            if(SelectedCartItem != null)
+            if (SelectedCartItem != null)
             {
                 Count = SelectedCartItem.Count;
+
             }
-            
+
         }
+
+
+
 
         public CartPageViewModel(ProductService productService)
         {
@@ -47,12 +59,9 @@ namespace PishiStirayNET.VeiwModels
 
             cartProductsList = Cart.CartProductList;
 
+
         }
 
-        private async void Update()
-        {
-            //productList = await _productService.GetProductFromCartAsync();
-        }
 
         [RelayCommand]
         private void IncreaseSelectedCartItemCount()
