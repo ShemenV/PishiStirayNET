@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PishiStirayNET.Views.Pages"
-       xmlns:converters="clr-namespace:PishiStirayNET.Infrastructure.Converters"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:PishiStirayNET.Infrastructure.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Name="CartPage1"
@@ -13,7 +14,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -51,8 +52,8 @@
             <ListView.ItemTemplate >
                 <DataTemplate>
                    
-                        <Grid>
-
+                        <Grid Background="White">
+                        
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="9*"/>
                                 <ColumnDefinition Width="5*"/>
@@ -211,6 +212,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <TextBlock Text="Итоговый заказ" 
@@ -225,12 +227,37 @@
                         Margin="10 30 0 0"
                       FontSize="16"/>
 
-            <Button Grid.Row="2"
+            <ComboBox Grid.Row="2"
+                      BorderThickness="3"
+                      Margin="10"
+                      materialDesign:HintAssist.Hint="Пункт выдачи"
+                      SelectedItem="{Binding SelectedIssuepoint, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding IssuePoints}"
+                      BorderBrush="{StaticResource additionalColor}"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0},  {1},  {2},  {3}">
+                                    <Binding Path="PunktIndex"/>
+                                    <Binding Path="PunktCity"/>
+                                    <Binding Path="PunktStreet"/>
+                                    <Binding Path="PunktDom"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Grid.Row="3"
                     Margin="30,40"
                     MinHeight="60"
+                    Command="{Binding CreateOrderCommand}"
                     Content="Оформить заказ"/>
 
         </Grid>
-        
+         
     </Grid>
 </Page>

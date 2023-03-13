@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Infrastructure;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,25 +21,25 @@ namespace PishiStirayNET.Services
         {
             UserDB user = await _trade.Users.Where(user => user.UserLogin == userLogin && user.UserPassword == userPassword).SingleOrDefaultAsync();
 
-           
-                if (user != null)
+
+            if (user != null)
+            {
+
+                CurrentUser.User = new Models.User
                 {
+                    UserID = user.UserId,
+                    UserName = user.UserName,
+                    UserLogin = user.UserLogin,
+                    UserPassword = user.UserPassword,
+                    UserPatronymic = user.UserPatronymic,
+                    UserRole = user.UserRoleNavigation.RoleName,
+                    UserSurname = user.UserSurname
+                };
 
-                    CurrentUser.User = new Models.User
-                    {
-                        UserID = user.UserId,
-                        UserName = user.UserName,
-                        UserLogin = user.UserLogin,
-                        UserPassword = user.UserPassword,
-                        UserPatronymic = user.UserPatronymic,
-                        UserRole = user.UserRoleNavigation.RoleName,
-                        UserSurname = user.UserSurname
-                    };
+                return true;
+            }
+            return false;
 
-                   return true;
-                }
-                return false;
-            
         }
     }
 }

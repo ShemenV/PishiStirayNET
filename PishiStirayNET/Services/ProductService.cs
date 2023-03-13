@@ -41,7 +41,7 @@ namespace PishiStirayNET.Services
                         Price = ((float)product.ProductCost),
                         Manufacturer = product.ProductManufacturerNavigation.Name,
                         Title = product.ProductName,
-
+                        MaxQuantity = product.ProductQuantityInStock
 
                     });
                 }
@@ -75,6 +75,12 @@ namespace PishiStirayNET.Services
             });
 
             return cartProducts;
+        }
+
+
+        public async void CreateNewOrder(List<CartItem> cartItems)
+        {
+
         }
     }
 }

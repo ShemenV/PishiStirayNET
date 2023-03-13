@@ -155,8 +155,8 @@ namespace PishiStirayNET.VeiwModels
                     Cart.CartProductList.Add(new CartItem
                     {
                         Product = SelectedProduct,
-                       Count = 1
-                       
+                        Count = 1
+
                     });
                 }
                 else
@@ -168,7 +168,7 @@ namespace PishiStirayNET.VeiwModels
             }
         }
 
-      
+
 
         [RelayCommand]
         private void GoToCart()

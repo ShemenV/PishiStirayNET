@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace PishiStirayNET.Infrastructure.Converters
 {
-    public class IntToBrushConverter :  MarkupExtension,IValueConverter
+    public class IntToBrushConverter : MarkupExtension, IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             float? number = (float?)value;
 
-            if(number == null || number <= 15)
+            if (number == null || number <= 15)
             {
                 return new SolidColorBrush(Colors.White);
             }

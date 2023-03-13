@@ -23,8 +23,6 @@
     <None Remove="Resources\R259E6.jpg" />
     <None Remove="Resources\T564P5.jpg" />
     <None Remove="Resources\А112Т4.jpg" />
-    <None Remove="Views\Pages\order.png" />
-    <None Remove="Views\Pages\order2.png" />
     <None Remove="Views\Windows\logo.png" />
   </ItemGroup>
 
@@ -99,8 +97,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\Pages\order.png" />
-    <Resource Include="Views\Pages\order2.png" />
     <Resource Include="Views\Windows\logo.png" />
   </ItemGroup>
 

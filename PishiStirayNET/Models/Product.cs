@@ -9,7 +9,7 @@ namespace PishiStirayNET.Models
         public string? Description { get; set; }
         public string? Manufacturer { get; set; }
         public float? Price { get; set; }
-
+        public int? MaxQuantity { get; set; }
         public float? CurrentDiscount { get; set; }
 
 
