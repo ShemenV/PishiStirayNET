@@ -208,7 +208,8 @@
 
         <Grid Grid.Column="1"
               Grid.Row="1"
-              VerticalAlignment="Top">
+              VerticalAlignment="Top"
+              Margin="0,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>

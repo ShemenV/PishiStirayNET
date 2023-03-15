@@ -263,7 +263,7 @@
                 HorizontalAlignment="Right"
                 Visibility="{Binding CartVisibility}"
                 Command="{Binding GoToCartCommand}"
-                VerticalAlignment="Bottom" Margin="0,0,20,60" Cursor="">
+                VerticalAlignment="Bottom" Margin="0,0,30,70" Cursor="">
             <Button.Content >
                 <Image Source="/Resources/Icons/order2.png"
                        Margin="13"/>

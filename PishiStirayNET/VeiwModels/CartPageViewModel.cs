@@ -141,7 +141,7 @@ namespace PishiStirayNET.VeiwModels
 
         private bool CanCreateOrder()
         {
-            if(SelectedIssuepoint!= null)
+            if(SelectedIssuepoint!= null && CartProductsList.Count >0)
             {
                 return true;
             }

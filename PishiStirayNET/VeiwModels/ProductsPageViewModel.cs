@@ -45,8 +45,16 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private Product selectedProduct;
 
-        [ObservableProperty]
-        private Visibility cartVisibility = Visibility.Visible;
+
+        
+        private Visibility cartVisibility;
+
+        public Visibility CartVisibility
+        {
+            get => cartVisibility;
+            set=> SetProperty(ref cartVisibility, value);
+
+        } 
 
         #region Changed методы
         partial void OnSearchQueryChanged(string? value)
