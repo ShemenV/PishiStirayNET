@@ -14,12 +14,14 @@ using System.Windows.Documents;
 
 namespace PishiStirayNET.VeiwModels
 {
+    
     public partial class CartPageViewModel : ObservableObject
     {
         private readonly ProductService _productService;
         private readonly OrderService _orderService;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(TotalPrice))]
         private ObservableCollection<CartItem>? cartProductsList;
 
         [ObservableProperty]
@@ -27,9 +29,11 @@ namespace PishiStirayNET.VeiwModels
         [NotifyCanExecuteChangedFor(nameof(CreateOrderCommand))]
         private CartItem? selectedCartItem;
 
-        [ObservableProperty]
-        
+        [ObservableProperty]       
         [NotifyPropertyChangedFor(nameof(TotalCount))]
+        [NotifyPropertyChangedFor(nameof(TotalPrice))]
+        [NotifyPropertyChangedFor(nameof(TotalDiscount))]
+        [NotifyPropertyChangedFor(nameof(ResultCost))]
         private int? count;
 
         [ObservableProperty]
@@ -42,6 +46,22 @@ namespace PishiStirayNET.VeiwModels
         public int? TotalCount
         {
             get => CartProductsList.Sum(item => item.Count);
+        }
+
+       
+        public float? TotalPrice
+        {
+            get => CartProductsList.Sum(item => item.Cost);
+        }
+
+        public float? TotalDiscount
+        {
+           get => CartProductsList.Sum(item => item.Discount);
+        }
+
+        public float? ResultCost
+        {
+            get => TotalPrice - TotalDiscount;
         }
 
         partial void OnCountChanged(int? value)
@@ -89,7 +109,8 @@ namespace PishiStirayNET.VeiwModels
             {
                 SelectedCartItem.Count++;
                 Count = SelectedCartItem.Count;
-                Debug.WriteLine(SelectedCartItem.Count);
+                Debug.WriteLine(SelectedCartItem.Cost);
+                
             }
 
         }

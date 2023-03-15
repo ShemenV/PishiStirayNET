@@ -161,7 +161,7 @@ namespace PishiStirayNET.VeiwModels
                 }
                 else
                 {
-                    if(cartItem.Count > cartItem.Product.MaxQuantity) 
+                    if(cartItem.Count < cartItem.Product.MaxQuantity) 
                     {
                         cartItem.Count++;
                     }                   
