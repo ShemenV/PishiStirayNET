@@ -23,9 +23,12 @@ namespace PishiStirayNET.VeiwModels
         private ObservableCollection<CartItem>? cartProductsList;
 
         [ObservableProperty]
+     
+        [NotifyCanExecuteChangedFor(nameof(CreateOrderCommand))]
         private CartItem? selectedCartItem;
 
         [ObservableProperty]
+        
         [NotifyPropertyChangedFor(nameof(TotalCount))]
         private int? count;
 
@@ -82,7 +85,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void IncreaseSelectedCartItemCount()
         {
-            if (SelectedCartItem != null && SelectedCartItem.Count > 0)
+            if (SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.MaxQuantity)
             {
                 SelectedCartItem.Count++;
                 Count = SelectedCartItem.Count;
@@ -104,11 +107,7 @@ namespace PishiStirayNET.VeiwModels
 
         private bool CanChangeCount()
         {
-            if (SelectedCartItem != null && SelectedCartItem.Count > 0 && SelectedCartItem.Product.)
-            {
-                return true;
-            }
-            return false;
+            return SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.MaxQuantity;
         }
 
 
@@ -116,6 +115,7 @@ namespace PishiStirayNET.VeiwModels
         private async void CreateOrder()
         {
             _orderService.CreateOrder(CartProductsList.ToList(), SelectedIssuepoint.IdPunkta);
+            CartProductsList.Clear();
         }
 
         private bool CanCreateOrder()

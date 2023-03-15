@@ -62,6 +62,16 @@ namespace PishiStirayNET.Services
                 });
             }
 
+            foreach (CartItem cartItem in cartItems)
+            {
+                ProductDB? product = await _tradeContext.Products.Where(p => p.ProductArticleNumber == cartItem.Product.Article).SingleOrDefaultAsync();
+
+                if(product != null)
+                {
+                    product.ProductQuantityInStock -= cartItem.Count;
+                }
+            }
+
             await _tradeContext.Orderproducts.AddRangeAsync(orderproductList);
 
            await _tradeContext.SaveChangesAsync();

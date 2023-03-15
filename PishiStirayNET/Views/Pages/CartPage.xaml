@@ -63,9 +63,10 @@
                             BorderThickness="3"
                             Padding="10,0"
                             MaxWidth="590"
-                            MinWidth="570"
+                                Width="590"
+                            MinWidth="590"
                                 Grid.Column="0"
-                            Width="610"
+                           
                             Background="White"
                             BorderBrush="{StaticResource additionalColor}">
 
