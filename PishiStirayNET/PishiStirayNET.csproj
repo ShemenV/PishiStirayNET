@@ -24,6 +24,7 @@
     <None Remove="Resources\T564P5.jpg" />
     <None Remove="Resources\А112Т4.jpg" />
     <None Remove="Views\Windows\logo.png" />
+    <None Remove="Views\Windows\picture.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -98,6 +99,7 @@
 
   <ItemGroup>
     <Resource Include="Views\Windows\logo.png" />
+    <Resource Include="Views\Windows\picture.png" />
   </ItemGroup>
 
   <ItemGroup>

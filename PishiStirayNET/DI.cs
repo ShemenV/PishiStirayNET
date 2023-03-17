@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using PishiStirayNET.Data;
 using PishiStirayNET.Services;
 using PishiStirayNET.VeiwModels;
+using PishiStirayNET.Views.Windows;
+using PishiStirayNET.Views.Windows.Interfaces;
 using System.Configuration;
 
 namespace PishiStirayNET
@@ -33,6 +35,9 @@ namespace PishiStirayNET
             services.AddTransient<CartPageViewModel>();
 
             #endregion
+
+
+            services.AddTransient<IWindow,AddProductWindow>();
 
 
             #region Database Contexts

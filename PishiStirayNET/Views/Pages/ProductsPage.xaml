@@ -15,6 +15,8 @@
       DataContext="{Binding ProductsPageViewModel, Source={StaticResource DI}}">
 
 
+
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -247,8 +249,23 @@
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Добавить в корзину"
-                              FontSize="12"
+                              FontSize="13"
                               Command="{Binding AddProductToCartCommand}"/>
+
+                    <MenuItem Header="Добавить продукт"
+                              FontSize="13"
+                              Visibility="{Binding AdminButtonsVisible}"
+                              Command="{Binding ShowAddProductWindowCommand}"/>
+                              
+
+                    <MenuItem Header="Редактировать продукт"
+                              FontSize="13"
+                              Visibility="{Binding AdminButtonsVisible}"/>
+
+                    <MenuItem Header="Удалить продукт"
+                              FontSize="13"
+                              Visibility="{Binding AdminButtonsVisible}"/>
+                              
                 </ContextMenu>
             </ListView.ContextMenu>
             

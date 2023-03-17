@@ -4,6 +4,7 @@ using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
 using PishiStirayNET.Views.Pages;
+using PishiStirayNET.Views.Windows.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace PishiStirayNET.VeiwModels
     {
         private readonly ProductService _productService;
         private readonly PageService _pageService;
+        private readonly IWindow _window;
 
         #region Свойства
 
@@ -45,8 +47,12 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private Product selectedProduct;
 
+        [ObservableProperty]
+        private Visibility adminButtonsVisible = Visibility.Collapsed;
 
-        
+
+
+
         private Visibility cartVisibility;
 
         public Visibility CartVisibility
@@ -77,14 +83,20 @@ namespace PishiStirayNET.VeiwModels
 
 
 
-        public ProductsPageViewModel(ProductService productService, PageService pageService)
+        public ProductsPageViewModel(ProductService productService, PageService pageService, IWindow window)
         {
             _productService = productService;
             _pageService = pageService;
+            _window = window;
 
             Debug.WriteLine("ProductsPageViewMode created");
 
             SelectedFilter = filtersList[0];
+
+            if(CurrentUser.User != null && CurrentUser.User.UserRole == "Администратор")
+            {
+                AdminButtonsVisible = Visibility.Visible;
+            }
         }
 
         public async void UpdateProductsList()
@@ -185,6 +197,12 @@ namespace PishiStirayNET.VeiwModels
         private void GoToCart()
         {
             _pageService.ChangePage(new CartPage());
+        }
+
+        [RelayCommand]
+        private void ShowAddProductWindow()
+        {
+            _window.Open();
         }
     }
 }
