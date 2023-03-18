@@ -3,8 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using PishiStirayNET.Data;
 using PishiStirayNET.Services;
 using PishiStirayNET.VeiwModels;
-using PishiStirayNET.Views.Windows;
-using PishiStirayNET.Views.Windows.Interfaces;
 using System.Configuration;
 
 namespace PishiStirayNET
@@ -21,8 +19,10 @@ namespace PishiStirayNET
 
             services.AddSingleton<UserService>();
             services.AddSingleton<PageService>();
-            services.AddSingleton<ProductService>();
+            services.AddTransient<ProductService>();
             services.AddSingleton<OrderService>();
+            services.AddSingleton<SaveFileDialogService>();
+
             #endregion
 
 
@@ -33,11 +33,12 @@ namespace PishiStirayNET
             services.AddTransient<ProductsPageViewModel>();
             services.AddTransient<AuthorizedUserUserControlViewModel>();
             services.AddTransient<CartPageViewModel>();
+            services.AddTransient<AddProductPageViewModel>();
 
             #endregion
 
 
-            services.AddTransient<IWindow,AddProductWindow>();
+
 
 
             #region Database Contexts
@@ -66,5 +67,6 @@ namespace PishiStirayNET
         public ProductsPageViewModel ProductsPageViewModel => _provider.GetRequiredService<ProductsPageViewModel>();
         public AuthorizedUserUserControlViewModel AuthorizedUserUserControlViewModel => _provider.GetRequiredService<AuthorizedUserUserControlViewModel>();
         public CartPageViewModel CartPageViewModel => _provider?.GetRequiredService<CartPageViewModel>();
+        public AddProductPageViewModel AddProductPageViewModel => _provider?.GetRequiredService<AddProductPageViewModel>();
     }
 }

@@ -8,13 +8,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace PishiStirayNET.VeiwModels
 {
-    
+
     public partial class CartPageViewModel : ObservableObject
     {
         private readonly ProductService _productService;
@@ -25,11 +23,11 @@ namespace PishiStirayNET.VeiwModels
         private ObservableCollection<CartItem>? cartProductsList;
 
         [ObservableProperty]
-     
+
         [NotifyCanExecuteChangedFor(nameof(CreateOrderCommand))]
         private CartItem? selectedCartItem;
 
-        [ObservableProperty]       
+        [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TotalCount))]
         [NotifyPropertyChangedFor(nameof(TotalPrice))]
         [NotifyPropertyChangedFor(nameof(TotalDiscount))]
@@ -48,7 +46,7 @@ namespace PishiStirayNET.VeiwModels
             get => CartProductsList.Sum(item => item.Count);
         }
 
-       
+
         public float? TotalPrice
         {
             get => CartProductsList.Sum(item => item.Cost);
@@ -56,7 +54,7 @@ namespace PishiStirayNET.VeiwModels
 
         public float? TotalDiscount
         {
-           get => CartProductsList.Sum(item => item.Discount);
+            get => CartProductsList.Sum(item => item.Discount);
         }
 
         public float? ResultCost
@@ -92,7 +90,7 @@ namespace PishiStirayNET.VeiwModels
         {
             _productService = productService;
             _orderService = orderService;
-            
+
             cartProductsList = Cart.CartProductList;
 
             Task.Run(async () =>
@@ -110,7 +108,7 @@ namespace PishiStirayNET.VeiwModels
                 SelectedCartItem.Count++;
                 Count = SelectedCartItem.Count;
                 Debug.WriteLine(SelectedCartItem.Cost);
-                
+
             }
 
         }
@@ -141,7 +139,7 @@ namespace PishiStirayNET.VeiwModels
 
         private bool CanCreateOrder()
         {
-            if(SelectedIssuepoint!= null && CartProductsList.Count >0)
+            if (SelectedIssuepoint != null && CartProductsList.Count > 0)
             {
                 return true;
             }

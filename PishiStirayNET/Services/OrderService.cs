@@ -6,8 +6,6 @@ using PishiStirayNET.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
@@ -16,15 +14,15 @@ namespace PishiStirayNET.Services
     {
         private readonly TradeContext _tradeContext;
 
-        public OrderService(TradeContext tradeContext) 
-        { 
-            _tradeContext= tradeContext;
+        public OrderService(TradeContext tradeContext)
+        {
+            _tradeContext = tradeContext;
         }
 
 
         public async Task<List<Issuepoint>> GetIssuePointsAsync()
         {
-           List<Issuepoint> issuePoints = new List<Issuepoint>();
+            List<Issuepoint> issuePoints = new List<Issuepoint>();
 
             await Task.Run(async () =>
             {
@@ -37,7 +35,7 @@ namespace PishiStirayNET.Services
         public async void CreateOrder(List<CartItem> cartItems, int issuepointID)
         {
             int orderNumber = _tradeContext.Order1s.Max(o => o.OrderId) + 1;
-            int receiptСode = _tradeContext.Order1s.Max(o => o.CodePoluch) +1;
+            int receiptСode = _tradeContext.Order1s.Max(o => o.CodePoluch) + 1;
 
             await _tradeContext.Order1s.AddAsync(new Order1
             {
@@ -48,11 +46,11 @@ namespace PishiStirayNET.Services
                 OrderPickupPoint = issuepointID,
                 Fio = CurrentUser.User != null ? $"{CurrentUser.User.UserSurname} {CurrentUser.User.UserName} {CurrentUser.User.UserPatronymic}" : null,
                 CodePoluch = receiptСode
-            }) ;
+            });
 
 
             List<Orderproduct> orderproductList = new List<Orderproduct>();
-            foreach(CartItem cartItem in cartItems)
+            foreach (CartItem cartItem in cartItems)
             {
                 orderproductList.Add(new Orderproduct
                 {
@@ -66,7 +64,7 @@ namespace PishiStirayNET.Services
             {
                 ProductDB? product = await _tradeContext.Products.Where(p => p.ProductArticleNumber == cartItem.Product.Article).SingleOrDefaultAsync();
 
-                if(product != null)
+                if (product != null)
                 {
                     product.ProductQuantityInStock -= cartItem.Count;
                 }
@@ -74,7 +72,7 @@ namespace PishiStirayNET.Services
 
             await _tradeContext.Orderproducts.AddRangeAsync(orderproductList);
 
-           await _tradeContext.SaveChangesAsync();
+            await _tradeContext.SaveChangesAsync();
 
         }
     }

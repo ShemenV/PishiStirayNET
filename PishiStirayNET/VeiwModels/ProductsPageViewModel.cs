@@ -4,7 +4,6 @@ using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
 using PishiStirayNET.Views.Pages;
-using PishiStirayNET.Views.Windows.Interfaces;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -16,7 +15,6 @@ namespace PishiStirayNET.VeiwModels
     {
         private readonly ProductService _productService;
         private readonly PageService _pageService;
-        private readonly IWindow _window;
 
         #region Свойства
 
@@ -58,9 +56,9 @@ namespace PishiStirayNET.VeiwModels
         public Visibility CartVisibility
         {
             get => cartVisibility;
-            set=> SetProperty(ref cartVisibility, value);
+            set => SetProperty(ref cartVisibility, value);
 
-        } 
+        }
 
         #region Changed методы
         partial void OnSearchQueryChanged(string? value)
@@ -83,17 +81,17 @@ namespace PishiStirayNET.VeiwModels
 
 
 
-        public ProductsPageViewModel(ProductService productService, PageService pageService, IWindow window)
+        public ProductsPageViewModel(ProductService productService, PageService pageService)
         {
             _productService = productService;
             _pageService = pageService;
-            _window = window;
+
 
             Debug.WriteLine("ProductsPageViewMode created");
 
             SelectedFilter = filtersList[0];
 
-            if(CurrentUser.User != null && CurrentUser.User.UserRole == "Администратор")
+            if (CurrentUser.User != null && CurrentUser.User.UserRole == "Администратор")
             {
                 AdminButtonsVisible = Visibility.Visible;
             }
@@ -181,10 +179,10 @@ namespace PishiStirayNET.VeiwModels
                 }
                 else
                 {
-                    if(cartItem.Count < cartItem.Product.MaxQuantity) 
+                    if (cartItem.Count < cartItem.Product.MaxQuantity)
                     {
                         cartItem.Count++;
-                    }                   
+                    }
                     Debug.WriteLine(Cart.CartProductList.IndexOf(cartItem));
                 }
 
@@ -202,7 +200,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void ShowAddProductWindow()
         {
-            _window.Open();
+            _pageService.ChangePage(new AddProductPage());
         }
     }
 }

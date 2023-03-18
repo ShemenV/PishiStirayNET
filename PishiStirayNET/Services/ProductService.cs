@@ -78,9 +78,27 @@ namespace PishiStirayNET.Services
         }
 
 
-        public async void CreateNewOrder(List<CartItem> cartItems)
+        public async Task<List<ProductCategory>> GetProductCategoriesAsync()
         {
-
+            return await _context.ProductCategories.ToListAsync();
         }
+
+        public async Task<List<Manufacturer>> GetManufacturersAsync()
+        {
+            return await _context.Manufacturers.ToListAsync();
+        }
+
+
+        public async Task<List<Delivery>> GetDeliveriesAsync()
+        {
+            return await _context.Deliveries.ToListAsync();
+        }
+
+        public async Task<List<Unit>> GetUnitAsync()
+        {
+            return await _context.Units.ToListAsync();
+        }
+
+
     }
 }
