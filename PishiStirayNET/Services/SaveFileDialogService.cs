@@ -10,38 +10,50 @@ namespace PishiStirayNET.Services
         public string SaveFileDialog()
         {
             OpenFileDialog saveFileDialog = new();
+            saveFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
+
             var result = saveFileDialog.ShowDialog();
             if (result == true)
             {
                 string filepath = saveFileDialog.FileName;
 
-                string resourcesPath = System.IO.Path.GetFullPath("../../../Resources");
+                string resourcesPath = System.IO.Path.GetFullPath("Resources");
 
                 byte[] data = default(byte[]);
 
-                using (FileStream fileStream = File.Create($"{resourcesPath}/{System.IO.Path.GetFileName(filepath)}"))
+                try
                 {
 
-                }
-
-                using (var stream = File.Open(filepath, FileMode.Open))
-                {
-                    var reader = new StreamReader(stream);
-                    using (var memstream = new MemoryStream())
+                    using (FileStream fileStream = File.Create($"{resourcesPath}/{System.IO.Path.GetFileName(filepath)}"))
                     {
-                        reader.BaseStream.CopyTo(memstream);
-                        data = memstream.ToArray();
+
                     }
+
+                    using (var stream = File.Open(filepath, FileMode.Open))
+                    {
+                        var reader = new StreamReader(stream);
+                        using (var memstream = new MemoryStream())
+                        {
+                            reader.BaseStream.CopyTo(memstream);
+                            data = memstream.ToArray();
+                        }
+                    }
+
+
+
+                    File.WriteAllBytes($"{resourcesPath}/{System.IO.Path.GetFileName(filepath)}", data);
+
                 }
+                catch
+                {
 
-
-                File.WriteAllBytes($"{resourcesPath}/{System.IO.Path.GetFileName(filepath)}", data);
+                }
 
 
                 FilePath = System.IO.Path.GetFileName(filepath);
                 return FilePath;
             }
-            return "picture.png";
+            return FilePath;
         }
     }
 }

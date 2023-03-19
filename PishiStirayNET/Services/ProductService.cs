@@ -3,6 +3,7 @@ using PishiStirayNET.Data;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -99,6 +100,41 @@ namespace PishiStirayNET.Services
             return await _context.Units.ToListAsync();
         }
 
+        public async void AddNewProduct(ProductDB productDB)
+        {
+            await _context.Products.AddAsync(productDB);
+            await _context.SaveChangesAsync();
+        }
 
+
+        public async Task<string> GenerateArticle()
+        {
+            string article = "";
+            List<ProductDB> articles = await _context.Products.ToListAsync();
+
+            await Task.Run(() =>
+            {
+                string[] symbolsArray = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Z" };
+
+                bool isArticle = false;
+
+                while (isArticle == false)
+                {
+                    Random rnd = new();
+                    for (int i = 0; i < 5; i = i + 1)
+                    {
+                        article = article + symbolsArray[rnd.Next(0, symbolsArray.Length)];
+                    }
+
+                    if (articles.All(a => a.ProductArticleNumber != article))
+                    {
+                        isArticle = true;
+                    }
+                }
+
+            });
+
+            return article;
+        }
     }
 }

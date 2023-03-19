@@ -2,16 +2,20 @@
 using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace PishiStirayNET.VeiwModels
 {
     public partial class AddProductPageViewModel : ObservableValidator
     {
         private readonly ProductService _productService;
+        private readonly PageService _pageService;
         private readonly SaveFileDialogService _saveFileDialogService;
 
         [ObservableProperty]
@@ -74,26 +78,24 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         [Required(ErrorMessage = "Заполните поле")]
         [Range(0, 1000000, ErrorMessage = "Не более 6 символов и только числа")]
-        private int? currentCount;
-
-
-        [ObservableProperty]
-        [Required(ErrorMessage = "Заполните поле")]
-        [Range(0, 1000000, ErrorMessage = "Не более 6 символов и только числа")]
         private int? maxCount;
 
 
         [ObservableProperty]
-        private Uri selectedPath = new Uri("/Resources/picture.png", UriKind.Relative);
+        private string selectedPath = "picture.png";
+
+        [ObservableProperty]
+        private BitmapImage imagePath = new(new Uri($"/Resources/picture.png", UriKind.Relative));
 
 
 
-        public AddProductPageViewModel(ProductService productService, SaveFileDialogService saveFileDialogService)
+        public AddProductPageViewModel(ProductService productService, SaveFileDialogService saveFileDialogService, PageService pageService)
         {
             _productService = productService;
+            _saveFileDialogService = saveFileDialogService;
+            _pageService = pageService;
 
             LoadProductData();
-            _saveFileDialogService = saveFileDialogService;
         }
 
         private async void LoadProductData()
@@ -107,20 +109,37 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void AddPhoto()
         {
-
-
-            SelectedPath = new Uri($"/Resources/{_saveFileDialogService.SaveFileDialog()}", UriKind.Relative);
+            SelectedPath = _saveFileDialogService.SaveFileDialog();
+            ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
             Debug.WriteLine(SelectedPath);
-
         }
 
         [RelayCommand]
-        private void AddNewProduct()
+        private async void AddNewProduct()
         {
             ValidateAllProperties();
 
+            if (HasErrors == false)
+            {
 
+                _productService.AddNewProduct(new ProductDB
+                {
+                    ProductArticleNumber = await _productService.GenerateArticle(),
+                    ProductName = Title,
+                    ProductDescription = Description,
+                    ProductCategory = SelectedCategory.IdCategory,
+                    ProductPhoto = SelectedPath,
+                    ProductManufacturer = SelectedManufacturer.IdManafacturer,
+                    ProductCost = (decimal)Price,
+                    CurrentDiscount = (sbyte?)CurrentDiscount,
+                    ProductQuantityInStock = (int)MaxCount,
+                    ProductDiscountAmount = MaxDiscount,
+                    UnitOfMeasurement = SelectedUnit.IdUnit,
+                    Delivery = SelectedDelivery.IdProvider,
+                });
+            }
 
+            _pageService.ChangePage(new ProductsPage());
         }
     }
 }

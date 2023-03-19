@@ -5,6 +5,9 @@ namespace PishiStirayNET.Data.DbEntities;
 
 public partial class ProductDB
 {
+
+
+
     [Key]
     public string ProductArticleNumber { get; set; } = null!;
 
