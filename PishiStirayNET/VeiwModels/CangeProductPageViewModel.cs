@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace PishiStirayNET.VeiwModels
@@ -204,9 +205,11 @@ namespace PishiStirayNET.VeiwModels
                     ProductQuantityInStock = (int)MaxCount,
                     ProductDiscountAmount = MaxDiscount,
                     UnitOfMeasurement = SelectedUnit.IdUnit,
-                    Delivery = SelectedDelivery.IdProvider,
+                    Delivery = SelectedDelivery.IdProvider
                 });
                 ChangedProduct.Product = null;
+
+                await Task.Delay(60);
 
                 _pageService.ChangePage(new ProductsPage());
             }

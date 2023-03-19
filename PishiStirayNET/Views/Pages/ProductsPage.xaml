@@ -266,7 +266,8 @@
 
                     <MenuItem Header="Удалить продукт"
                               FontSize="13"
-                              Visibility="{Binding AdminButtonsVisible}"/>
+                              Visibility="{Binding AdminButtonsVisible}"
+                              Command="{Binding DeleteProductCommand, IsAsync=True}"/>
                               
                 </ContextMenu>
             </ListView.ContextMenu>

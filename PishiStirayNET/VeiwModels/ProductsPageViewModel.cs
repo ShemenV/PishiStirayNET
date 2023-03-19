@@ -7,6 +7,7 @@ using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace PishiStirayNET.VeiwModels
@@ -95,6 +96,7 @@ namespace PishiStirayNET.VeiwModels
             {
                 AdminButtonsVisible = Visibility.Visible;
             }
+
         }
 
         public async void UpdateProductsList()
@@ -210,6 +212,17 @@ namespace PishiStirayNET.VeiwModels
             Debug.WriteLine(SelectedProduct.Category.NameCategory);
 
             _pageService.ChangePage(new CangeProductPage());
+        }
+
+        [RelayCommand]
+        private async void DeleteProduct()
+        {
+            if (SelectedProduct != null)
+            {
+                _productService.DeleteProduct(SelectedProduct);
+                await Task.Delay(10000);
+                UpdateProductsList();
+            }
         }
     }
 }

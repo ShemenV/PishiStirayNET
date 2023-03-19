@@ -149,7 +149,29 @@ namespace PishiStirayNET.Services
             if (product != null)
             {
                 product.ProductManufacturer = productDB.ProductManufacturer;
+                product.ProductPhoto = productDB.ProductPhoto;
+                product.CurrentDiscount = productDB.CurrentDiscount;
+                product.Delivery = productDB.Delivery;
+                product.ProductCategory = productDB.ProductCategory;
+                product.ProductDescription = productDB.ProductDescription;
+                product.ProductName = productDB.ProductName;
+                product.UnitOfMeasurement = productDB.UnitOfMeasurement;
+                product.ProductCost = productDB.ProductCost;
+                product.ProductQuantityInStock = productDB.ProductQuantityInStock;
+
                 _context.SaveChanges();
+            }
+        }
+
+
+        public async void DeleteProduct(Product productDB)
+        {
+            ProductDB? product = await _context.Products.Where(p => p.ProductArticleNumber == productDB.Article).SingleOrDefaultAsync();
+
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
             }
         }
     }
