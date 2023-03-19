@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace PishiStirayNET.VeiwModels
 {
-    public partial class AddProductPageViewModel : ObservableValidator
+    public partial class CangeProductPageViewModel : ObservableValidator
     {
         private readonly ProductService _productService;
         private readonly PageService _pageService;
@@ -90,18 +90,17 @@ namespace PishiStirayNET.VeiwModels
 
 
 
-        public AddProductPageViewModel(ProductService productService, SaveFileDialogService saveFileDialogService, PageService pageService)
+        public CangeProductPageViewModel(ProductService productService, SaveFileDialogService saveFileDialogService, PageService pageService)
         {
+
             _productService = productService;
             _saveFileDialogService = saveFileDialogService;
             _pageService = pageService;
 
 
-
             LoadProductData();
-
-
         }
+
 
         protected virtual async void LoadProductData()
         {
@@ -112,14 +111,53 @@ namespace PishiStirayNET.VeiwModels
                 Deliveries = await _productService.GetDeliveriesAsync();
                 Units = await _productService.GetUnitAsync();
 
-                if (ChangedProduct.Product != null)
+                if (ChangedProduct.Product != null && ProductCategories != null)
                 {
 
-                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedProduct.Product.Category)];
-                    Debug.WriteLine(ProductCategories.IndexOf(ChangedProduct.Product.Category));
-                    SelectedManufacturer = ChangedProduct.Product.Manufacturer;
-                    SelectedDelivery = ChangedProduct.Product.Delivery;
-                    SelectedUnit = ChangedProduct.Product.Unit;
+                    SelectedCategory = ProductCategories[0];
+
+                    int index = 0;
+                    for (int i = 0; i < ProductCategories.Count; i++)
+                    {
+                        if (ProductCategories[i].IdCategory == ChangedProduct.Product.Category.IdCategory)
+                        {
+                            index = i; break;
+                        }
+                    }
+                    SelectedCategory = ProductCategories[index];
+
+                    index = 0;
+                    for (int i = 0; i < Manufacturers.Count; i++)
+                    {
+                        if (Manufacturers[i].IdManafacturer == ChangedProduct.Product.Manufacturer.IdManafacturer)
+                        {
+                            index = i; break;
+                        }
+                    }
+                    SelectedManufacturer = Manufacturers[index];
+
+
+                    index = 0;
+                    for (int i = 0; i < Deliveries.Count; i++)
+                    {
+                        if (Deliveries[i].IdProvider == ChangedProduct.Product.Delivery.IdProvider)
+                        {
+                            index = i; break;
+                        }
+                    }
+                    SelectedDelivery = Deliveries[index];
+
+
+                    index = 0;
+                    for (int i = 0; i < Units.Count; i++)
+                    {
+                        if (Units[i].IdUnit == ChangedProduct.Product.Unit.IdUnit)
+                        {
+                            index = i; break;
+                        }
+                    }
+                    SelectedUnit = Units[index];
+
                     Title = ChangedProduct.Product.Title;
                     Description = ChangedProduct.Product.Description;
                     Price = ChangedProduct.Product.Price;
@@ -127,7 +165,7 @@ namespace PishiStirayNET.VeiwModels
                     MaxDiscount = ChangedProduct.Product.MaxDiscount;
                     MaxCount = ChangedProduct.Product.MaxQuantity;
                     SelectedPath = ChangedProduct.Product.Image;
-
+                    ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
                 }
             }
             catch (Exception ex)
@@ -136,8 +174,9 @@ namespace PishiStirayNET.VeiwModels
             }
         }
 
+
         [RelayCommand]
-        private void AddPhoto()
+        private void CahngePhoto()
         {
             SelectedPath = _saveFileDialogService.SaveFileDialog();
             ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
@@ -145,16 +184,16 @@ namespace PishiStirayNET.VeiwModels
         }
 
         [RelayCommand]
-        private async void AddNewProduct()
+        private async void ChangeProduct()
         {
             ValidateAllProperties();
 
             if (HasErrors == false)
             {
 
-                _productService.AddNewProduct(new ProductDB
+                _productService.ChangeProduct(new ProductDB
                 {
-                    ProductArticleNumber = await _productService.GenerateArticle(),
+                    ProductArticleNumber = ChangedProduct.Product.Article,
                     ProductName = Title,
                     ProductDescription = Description,
                     ProductCategory = SelectedCategory.IdCategory,
@@ -167,11 +206,10 @@ namespace PishiStirayNET.VeiwModels
                     UnitOfMeasurement = SelectedUnit.IdUnit,
                     Delivery = SelectedDelivery.IdProvider,
                 });
+                ChangedProduct.Product = null;
 
                 _pageService.ChangePage(new ProductsPage());
             }
-
-
         }
     }
 }

@@ -128,7 +128,7 @@
                   Margin="0,10,0,0"
                   HorizontalContentAlignment="Center"
                   SelectedItem="{Binding SelectedProduct}"
-                  ItemsSource="{Binding ProductsList}"
+                  ItemsSource="{Binding ProductsList, UpdateSourceTrigger=PropertyChanged}"
                   Height="{Binding ActualHeight, ElementName=ProductPage, Mode=OneWay, Converter={converters:SubtractConverter Value=100}}">
 
 
@@ -180,8 +180,9 @@
                                          
                                        Margin="2,3,4,3"/>
 
-                                <TextBlock Text="{Binding Manufacturer, 
-                                StringFormat='Производитель - {0}'}"
+                                <TextBlock DataContext="{Binding Manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Name, 
+                                StringFormat='Производитель - {0}', UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,7"/>
 
                                 
@@ -258,9 +259,10 @@
                               Command="{Binding ShowAddProductWindowCommand}"/>
                               
 
-                    <MenuItem Header="Редактировать продукт"
+                    <MenuItem Header="Изменить продукт"
                               FontSize="13"
-                              Visibility="{Binding AdminButtonsVisible}"/>
+                              Visibility="{Binding AdminButtonsVisible}"
+                              Command="{Binding GoToChangeProductPageCommand}"/>
 
                     <MenuItem Header="Удалить продукт"
                               FontSize="13"

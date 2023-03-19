@@ -18,10 +18,10 @@ namespace PishiStirayNET
             #region Services
 
             services.AddSingleton<UserService>();
-            services.AddSingleton<PageService>();
-            services.AddTransient<ProductService>();
+            services.AddScoped<PageService>();
+            services.AddSingleton<ProductService>();
             services.AddSingleton<OrderService>();
-            services.AddSingleton<SaveFileDialogService>();
+            services.AddTransient<SaveFileDialogService>();
 
             #endregion
 
@@ -34,6 +34,7 @@ namespace PishiStirayNET
             services.AddTransient<AuthorizedUserUserControlViewModel>();
             services.AddTransient<CartPageViewModel>();
             services.AddTransient<AddProductPageViewModel>();
+            services.AddTransient<CangeProductPageViewModel>();
 
             #endregion
 
@@ -46,6 +47,7 @@ namespace PishiStirayNET
             {
                 string connectionString = ConfigurationManager.ConnectionStrings["TradeDatabase"].ConnectionString;
                 options.UseLazyLoadingProxies().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+
             }, ServiceLifetime.Transient);
 
 
@@ -68,5 +70,6 @@ namespace PishiStirayNET
         public AuthorizedUserUserControlViewModel AuthorizedUserUserControlViewModel => _provider.GetRequiredService<AuthorizedUserUserControlViewModel>();
         public CartPageViewModel CartPageViewModel => _provider?.GetRequiredService<CartPageViewModel>();
         public AddProductPageViewModel AddProductPageViewModel => _provider?.GetRequiredService<AddProductPageViewModel>();
+        public CangeProductPageViewModel CangeProductPageViewModel => _provider?.GetRequiredService<CangeProductPageViewModel>();
     }
 }

@@ -26,6 +26,9 @@ namespace PishiStirayNET.Services
             List<Models.Product> products = new();
             List<ProductDB> productDBs = await _context.Products.ToListAsync();
             await _context.Manufacturers.ToListAsync();
+            await _context.ProductCategories.ToListAsync();
+            await _context.Deliveries.ToListAsync();
+            await _context.Units.ToListAsync();
 
 
             await Task.Run(() =>
@@ -40,10 +43,13 @@ namespace PishiStirayNET.Services
                         Description = product.ProductDescription,
                         Image = (product.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductPhoto) == true) ? "picture.png" : product.ProductPhoto,
                         Price = ((float)product.ProductCost),
-                        Manufacturer = product.ProductManufacturerNavigation.Name,
+                        Manufacturer = product.ProductManufacturerNavigation,
                         Title = product.ProductName,
-                        MaxQuantity = product.ProductQuantityInStock
-
+                        MaxQuantity = product.ProductQuantityInStock,
+                        Category = product.ProductCategoryNavigation,
+                        Delivery = product.DeliveryNavigation,
+                        Unit = product.UnitOfMeasurementNavigation,
+                        MaxDiscount = product.ProductDiscountAmount
                     });
                 }
 
@@ -67,7 +73,6 @@ namespace PishiStirayNET.Services
                 foreach (Product product in products)
                 {
                     CartItem? cartItem = Cart.CartProductList.Where(i => i.Product.Article == product.Article).FirstOrDefault();
-
                     if (cartItem != null)
                     {
 
@@ -135,6 +140,17 @@ namespace PishiStirayNET.Services
             });
 
             return article;
+        }
+
+        public async void ChangeProduct(ProductDB productDB)
+        {
+            ProductDB? product = await _context.Products.Where(p => p.ProductArticleNumber == productDB.ProductArticleNumber).SingleOrDefaultAsync();
+
+            if (product != null)
+            {
+                product.ProductManufacturer = productDB.ProductManufacturer;
+                _context.SaveChanges();
+            }
         }
     }
 }

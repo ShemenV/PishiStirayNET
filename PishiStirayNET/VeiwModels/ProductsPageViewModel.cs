@@ -101,7 +101,7 @@ namespace PishiStirayNET.VeiwModels
         {
             List<Product> products = await _productService.GetProductsAsync();
             TotalProductsCount = products.Count;
-
+            Debug.WriteLine("ProductsPageViewMode update");
 
             if (SearchQuery != null)
             {
@@ -201,6 +201,15 @@ namespace PishiStirayNET.VeiwModels
         private void ShowAddProductWindow()
         {
             _pageService.ChangePage(new AddProductPage());
+        }
+
+        [RelayCommand]
+        private void GoToChangeProductPage()
+        {
+            ChangedProduct.Product = SelectedProduct;
+            Debug.WriteLine(SelectedProduct.Category.NameCategory);
+
+            _pageService.ChangePage(new CangeProductPage());
         }
     }
 }
