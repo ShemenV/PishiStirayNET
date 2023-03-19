@@ -164,6 +164,8 @@ namespace PishiStirayNET.Services
         }
 
 
+
+
         public async void DeleteProduct(Product productDB)
         {
             ProductDB? product = await _context.Products.Where(p => p.ProductArticleNumber == productDB.Article).SingleOrDefaultAsync();
