@@ -26,8 +26,8 @@ namespace PishiStirayNET.VeiwModels
             _pageService = pageService;
             if (CurrentUser.User != null)
             {
-                Fullname = $"{CurrentUser.User.UserSurname} {CurrentUser.User.UserName} {CurrentUser.User.UserPatronymic}";
-                Role = CurrentUser.User.UserRole;
+                Fullname = CurrentUser.User.UserSurname + " " + CurrentUser.User.UserName + " " + CurrentUser.User.UserPatronymic;
+                Role = CurrentUser.User.UserRoleNavigation.RoleName;
                 IsAuthorized = true;
             }
             else

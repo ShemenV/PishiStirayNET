@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
 {
-    internal class UserService
+    public class UserService
     {
         private readonly TradeContext _trade;
 
@@ -25,21 +25,22 @@ namespace PishiStirayNET.Services
             if (user != null)
             {
 
-                CurrentUser.User = new Models.User
-                {
-                    UserID = user.UserId,
-                    UserName = user.UserName,
-                    UserLogin = user.UserLogin,
-                    UserPassword = user.UserPassword,
-                    UserPatronymic = user.UserPatronymic,
-                    UserRole = user.UserRoleNavigation.RoleName,
-                    UserSurname = user.UserSurname
-                };
+                CurrentUser.User = user;
 
                 return true;
             }
             return false;
 
+        }
+
+        public async void SignUp(UserDB user)
+        {
+            UserDB userDB = user;
+            userDB.UserId = _trade.Users.Max(u => u.UserId) + 1;
+            userDB.UserRole = 2;
+
+            await _trade.Users.AddAsync(userDB);
+            await _trade.SaveChangesAsync();
         }
     }
 }

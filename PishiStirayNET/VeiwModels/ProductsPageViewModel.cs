@@ -92,7 +92,7 @@ namespace PishiStirayNET.VeiwModels
 
             SelectedFilter = filtersList[0];
 
-            if (CurrentUser.User != null && CurrentUser.User.UserRole == "Администратор")
+            if (CurrentUser.User != null && CurrentUser.User.UserRole == 1)
             {
                 AdminButtonsVisible = Visibility.Visible;
             }

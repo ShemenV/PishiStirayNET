@@ -1,9 +1,9 @@
-﻿using PishiStirayNET.Models;
+﻿using PishiStirayNET.Data.DbEntities;
 
 namespace PishiStirayNET.Infrastructure
 {
     internal static class CurrentUser
     {
-        public static User User { get; set; }
+        public static UserDB User { get; set; }
     }
 }
