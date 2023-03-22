@@ -31,6 +31,7 @@ public partial class ProductDB
 
     public int Delivery { get; set; }
 
+    public int IsDeleted { get; set; }
 
     public int? ProductDiscountAmount { get; set; }
 

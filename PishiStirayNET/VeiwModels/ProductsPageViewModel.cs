@@ -101,7 +101,7 @@ namespace PishiStirayNET.VeiwModels
 
         public async void UpdateProductsList()
         {
-            List<Product> products = await _productService.GetProductsAsync();
+            List<Product> products = await _productService.GetAllProductsAsync();
             TotalProductsCount = products.Count;
             Debug.WriteLine("ProductsPageViewMode update");
 

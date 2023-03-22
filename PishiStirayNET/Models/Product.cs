@@ -17,6 +17,7 @@ namespace PishiStirayNET.Models
         public Delivery Delivery { get; set; }
         public Unit Unit { get; set; }
         public int? MaxDiscount { get; set; }
+        public int IsDeleted { get; set; }
 
 
         public string Image { get; set; }
