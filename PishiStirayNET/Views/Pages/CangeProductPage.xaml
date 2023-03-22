@@ -39,7 +39,7 @@
                     Content="Выбрать изображение"
                     Margin="20,0"
                     Width="200"
-                    Command="{Binding AddPhotoCommand}"/>
+                    Command="{Binding ChangePhotoCommand}"/>
 
         </StackPanel>
 

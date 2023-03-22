@@ -101,7 +101,7 @@ namespace PishiStirayNET.VeiwModels
 
         public async void UpdateProductsList()
         {
-            List<Product> products = await _productService.GetAllProductsAsync();
+            List<Product> products = await _productService.GetNoDeletedProductsAsync();
             TotalProductsCount = products.Count;
             Debug.WriteLine("ProductsPageViewMode update");
 
@@ -220,7 +220,7 @@ namespace PishiStirayNET.VeiwModels
             if (SelectedProduct != null)
             {
                 _productService.DeleteProduct(SelectedProduct);
-                await Task.Delay(10000);
+                await Task.Delay(100);
                 UpdateProductsList();
             }
         }

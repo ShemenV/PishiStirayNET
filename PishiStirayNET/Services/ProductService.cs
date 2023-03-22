@@ -62,6 +62,46 @@ namespace PishiStirayNET.Services
         }
 
 
+        public async Task<List<Models.Product>> GetNoDeletedProductsAsync(string? searchQuery = null, string? orderValue = null, string? filterValue = null)
+        {
+            List<Models.Product> products = new();
+            List<ProductDB> productDBs = await _context.Products.Where(p => p.IsDeleted != 1).ToListAsync();
+            await _context.Manufacturers.ToListAsync();
+            await _context.ProductCategories.ToListAsync();
+            await _context.Deliveries.ToListAsync();
+            await _context.Units.ToListAsync();
+
+
+            await Task.Run(() =>
+            {
+                Debug.WriteLine(productDBs.Count);
+                foreach (ProductDB product in productDBs)
+                {
+                    products.Add(new Models.Product
+                    {
+                        Article = product.ProductArticleNumber,
+                        CurrentDiscount = product.CurrentDiscount,
+                        Description = product.ProductDescription,
+                        Image = (product.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductPhoto) == true) ? "picture.png" : product.ProductPhoto,
+                        Price = ((float)product.ProductCost),
+                        Manufacturer = product.ProductManufacturerNavigation,
+                        Title = product.ProductName,
+                        MaxQuantity = product.ProductQuantityInStock,
+                        Category = product.ProductCategoryNavigation,
+                        Delivery = product.DeliveryNavigation,
+                        Unit = product.UnitOfMeasurementNavigation,
+                        MaxDiscount = product.ProductDiscountAmount
+                    });
+                }
+
+            });
+
+
+
+            Debug.Write(products.Count);
+            return products;
+        }
+
 
         public async Task<List<Product>> GetProductFromCartAsync()
         {
@@ -172,7 +212,7 @@ namespace PishiStirayNET.Services
 
             if (product != null)
             {
-                _context.Products.Remove(product);
+                product.IsDeleted = 1;
                 await _context.SaveChangesAsync();
             }
         }
