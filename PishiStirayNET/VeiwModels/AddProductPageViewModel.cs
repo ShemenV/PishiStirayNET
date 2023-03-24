@@ -112,21 +112,21 @@ namespace PishiStirayNET.VeiwModels
                 Deliveries = await _productService.GetDeliveriesAsync();
                 Units = await _productService.GetUnitAsync();
 
-                if (ChangedProduct.Product != null)
+                if (ChangedObjects.Product != null)
                 {
 
-                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedProduct.Product.Category)];
-                    Debug.WriteLine(ProductCategories.IndexOf(ChangedProduct.Product.Category));
-                    SelectedManufacturer = ChangedProduct.Product.Manufacturer;
-                    SelectedDelivery = ChangedProduct.Product.Delivery;
-                    SelectedUnit = ChangedProduct.Product.Unit;
-                    Title = ChangedProduct.Product.Title;
-                    Description = ChangedProduct.Product.Description;
-                    Price = ChangedProduct.Product.Price;
-                    CurrentDiscount = ChangedProduct.Product.CurrentDiscount;
-                    MaxDiscount = ChangedProduct.Product.MaxDiscount;
-                    MaxCount = ChangedProduct.Product.MaxQuantity;
-                    SelectedPath = ChangedProduct.Product.Image;
+                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedObjects.Product.Category)];
+                    Debug.WriteLine(ProductCategories.IndexOf(ChangedObjects.Product.Category));
+                    SelectedManufacturer = ChangedObjects.Product.Manufacturer;
+                    SelectedDelivery = ChangedObjects.Product.Delivery;
+                    SelectedUnit = ChangedObjects.Product.Unit;
+                    Title = ChangedObjects.Product.Title;
+                    Description = ChangedObjects.Product.Description;
+                    Price = ChangedObjects.Product.Price;
+                    CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
+                    MaxDiscount = ChangedObjects.Product.MaxDiscount;
+                    MaxCount = ChangedObjects.Product.MaxQuantity;
+                    SelectedPath = ChangedObjects.Product.Image;
 
                 }
             }

@@ -22,6 +22,7 @@ namespace PishiStirayNET
             services.AddTransient<ProductService>();
             services.AddSingleton<OrderService>();
             services.AddTransient<SaveFileDialogService>();
+            services.AddTransient<ManufacturersService>();
 
             #endregion
 
@@ -36,6 +37,7 @@ namespace PishiStirayNET
             services.AddTransient<AddProductPageViewModel>();
             services.AddTransient<CangeProductPageViewModel>();
             services.AddTransient<SignUpPageViewModel>();
+            services.AddTransient<ManufacturersPageViewModel>();
 
             #endregion
 
@@ -73,5 +75,6 @@ namespace PishiStirayNET
         public AddProductPageViewModel AddProductPageViewModel => _provider?.GetRequiredService<AddProductPageViewModel>();
         public CangeProductPageViewModel CangeProductPageViewModel => _provider?.GetRequiredService<CangeProductPageViewModel>();
         public SignUpPageViewModel SignUpPageViewModel => _provider?.GetRequiredService<SignUpPageViewModel>();
+        public ManufacturersPageViewModel ManufacturersPageViewModel => _provider?.GetRequiredService<ManufacturersPageViewModel>();
     }
 }

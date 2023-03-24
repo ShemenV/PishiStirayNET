@@ -112,7 +112,7 @@ namespace PishiStirayNET.VeiwModels
                 Deliveries = await _productService.GetDeliveriesAsync();
                 Units = await _productService.GetUnitAsync();
 
-                if (ChangedProduct.Product != null && ProductCategories != null)
+                if (ChangedObjects.Product != null && ProductCategories != null)
                 {
 
                     SelectedCategory = ProductCategories[0];
@@ -120,7 +120,7 @@ namespace PishiStirayNET.VeiwModels
                     int index = 0;
                     for (int i = 0; i < ProductCategories.Count; i++)
                     {
-                        if (ProductCategories[i].IdCategory == ChangedProduct.Product.Category.IdCategory)
+                        if (ProductCategories[i].IdCategory == ChangedObjects.Product.Category.IdCategory)
                         {
                             index = i; break;
                         }
@@ -130,7 +130,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Manufacturers.Count; i++)
                     {
-                        if (Manufacturers[i].IdManafacturer == ChangedProduct.Product.Manufacturer.IdManafacturer)
+                        if (Manufacturers[i].IdManafacturer == ChangedObjects.Product.Manufacturer.IdManafacturer)
                         {
                             index = i; break;
                         }
@@ -141,7 +141,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Deliveries.Count; i++)
                     {
-                        if (Deliveries[i].IdProvider == ChangedProduct.Product.Delivery.IdProvider)
+                        if (Deliveries[i].IdProvider == ChangedObjects.Product.Delivery.IdProvider)
                         {
                             index = i; break;
                         }
@@ -152,20 +152,20 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Units.Count; i++)
                     {
-                        if (Units[i].IdUnit == ChangedProduct.Product.Unit.IdUnit)
+                        if (Units[i].IdUnit == ChangedObjects.Product.Unit.IdUnit)
                         {
                             index = i; break;
                         }
                     }
                     SelectedUnit = Units[index];
 
-                    Title = ChangedProduct.Product.Title;
-                    Description = ChangedProduct.Product.Description;
-                    Price = ChangedProduct.Product.Price;
-                    CurrentDiscount = ChangedProduct.Product.CurrentDiscount;
-                    MaxDiscount = ChangedProduct.Product.MaxDiscount;
-                    MaxCount = ChangedProduct.Product.MaxQuantity;
-                    SelectedPath = ChangedProduct.Product.Image;
+                    Title = ChangedObjects.Product.Title;
+                    Description = ChangedObjects.Product.Description;
+                    Price = ChangedObjects.Product.Price;
+                    CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
+                    MaxDiscount = ChangedObjects.Product.MaxDiscount;
+                    MaxCount = ChangedObjects.Product.MaxQuantity;
+                    SelectedPath = ChangedObjects.Product.Image;
                     ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
                 }
             }
@@ -194,7 +194,7 @@ namespace PishiStirayNET.VeiwModels
 
                 _productService.ChangeProduct(new ProductDB
                 {
-                    ProductArticleNumber = ChangedProduct.Product.Article,
+                    ProductArticleNumber = ChangedObjects.Product.Article,
                     ProductName = Title,
                     ProductDescription = Description,
                     ProductCategory = SelectedCategory.IdCategory,
@@ -207,7 +207,7 @@ namespace PishiStirayNET.VeiwModels
                     UnitOfMeasurement = SelectedUnit.IdUnit,
                     Delivery = SelectedDelivery.IdProvider
                 });
-                ChangedProduct.Product = null;
+                ChangedObjects.Product = null;
 
                 await Task.Delay(60);
 

@@ -208,7 +208,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void GoToChangeProductPage()
         {
-            ChangedProduct.Product = SelectedProduct;
+            ChangedObjects.Product = SelectedProduct;
             Debug.WriteLine(SelectedProduct.Category.NameCategory);
 
             _pageService.ChangePage(new CangeProductPage());
@@ -220,9 +220,17 @@ namespace PishiStirayNET.VeiwModels
             if (SelectedProduct != null)
             {
                 _productService.DeleteProduct(SelectedProduct);
-                await Task.Delay(100);
+                await Task.Delay(90);
                 UpdateProductsList();
             }
+        }
+        
+        [RelayCommand]
+        private void GoToManufacturers()
+        {
+            
+                _pageService.ChangePage(new ManufacturersPage());
+            
         }
     }
 }
