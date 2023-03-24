@@ -275,7 +275,7 @@
                     <MenuItem Header="Перейти к поставщикам"
                               FontSize="13"
                               Visibility="{Binding AdminButtonsVisible}"
-                              Command="{Binding GoToManufacturersCommand}"/>
+                              Command="{Binding GoToDeliveriesCommand}"/>
                               
                 </ContextMenu>
             </ListView.ContextMenu>

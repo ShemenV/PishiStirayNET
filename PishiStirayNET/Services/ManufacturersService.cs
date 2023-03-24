@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PishiStirayNET.Data;
 using PishiStirayNET.Data.DbEntities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
@@ -22,5 +20,26 @@ namespace PishiStirayNET.Services
         {
             return await _tradeContext.Manufacturers.ToListAsync();
         }
+
+        public async void ChangeManufacturer(Manufacturer manufacturer)
+        {
+            Manufacturer newManufacturer = await _tradeContext.Manufacturers.Where(m => m.IdManafacturer == manufacturer.IdManafacturer).FirstOrDefaultAsync();
+
+            if (newManufacturer != null)
+            {
+                newManufacturer.Name = manufacturer.Name;
+                await _tradeContext.SaveChangesAsync();
+            }
+        }
+
+
+        public async void AddManufacturer(Manufacturer manufacturer)
+        {
+            manufacturer.IdManafacturer = await _tradeContext.Manufacturers.MaxAsync(m => m.IdManafacturer) + 1;
+            _tradeContext.Manufacturers.Add(manufacturer);
+            await _tradeContext.SaveChangesAsync();
+        }
+
+
     }
 }

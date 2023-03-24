@@ -224,13 +224,18 @@ namespace PishiStirayNET.VeiwModels
                 UpdateProductsList();
             }
         }
-        
+
         [RelayCommand]
         private void GoToManufacturers()
         {
-            
-                _pageService.ChangePage(new ManufacturersPage());
-            
+
+            _pageService.ChangePage(new ManufacturersPage());
+
         }
+
+        [RelayCommand]
+        private void GoToDeliveries() =>
+          _pageService.ChangePage(new DeliveriesPage());
+
     }
 }

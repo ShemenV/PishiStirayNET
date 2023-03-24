@@ -3,11 +3,11 @@
 namespace PishiStirayNET.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for CangeProductPage.xaml
+    /// Логика взаимодействия для DeliveriesPage.xaml
     /// </summary>
-    public partial class CangeProductPage : Page
+    public partial class DeliveriesPage : Page
     {
-        public CangeProductPage()
+        public DeliveriesPage()
         {
             InitializeComponent();
         }
