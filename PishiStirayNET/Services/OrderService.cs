@@ -5,6 +5,7 @@ using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,7 +74,33 @@ namespace PishiStirayNET.Services
             await _tradeContext.Orderproducts.AddRangeAsync(orderproductList);
 
             await _tradeContext.SaveChangesAsync();
+        }
 
+
+        public async Task<List<Order>> GetAllOrdersAsync()
+        {
+            List<Order1> order1s = await _tradeContext.Order1s.ToListAsync();
+            List<Order> orders = new List<Order>();
+            foreach (Order1 order1 in order1s)
+            {
+
+                orders.Add(new Order
+                {
+                    OrderId = order1.OrderId,
+                    CodePoluch = order1.CodePoluch,
+                    Fio = order1.Fio,
+                    OrderDeliveryDate = order1.OrderDeliveryDate,
+                    OrderDeliveryDateEnd = order1.OrderDeliveryDateEnd,
+                    OrderPickupPoint = order1.OrderPickupPoint,
+                    OrderPickupPointNavigation = order1.OrderPickupPointNavigation,
+                    OrderStatus = order1.OrderStatus,
+                    OrderStatusNavigation = order1.OrderStatusNavigation,
+                    FullPrice = (float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost),
+                    Discount =  (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost/100 * op.ProductArticleNumberNavigation.CurrentDiscount)) / ((float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost) /100),
+                });
+               
+            }
+            return orders;
         }
     }
 }

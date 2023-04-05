@@ -49,7 +49,8 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private Visibility adminButtonsVisible = Visibility.Collapsed;
 
-
+        [ObservableProperty]
+        private Visibility adminOrManagerButtonsVisible = Visibility.Collapsed;
 
 
         private Visibility cartVisibility;
@@ -95,8 +96,12 @@ namespace PishiStirayNET.VeiwModels
             if (CurrentUser.User != null && CurrentUser.User.UserRole == 1)
             {
                 AdminButtonsVisible = Visibility.Visible;
+                AdminOrManagerButtonsVisible= Visibility.Visible;
             }
-
+            else if(CurrentUser.User != null && CurrentUser.User.UserRole == 3)
+            {
+                AdminOrManagerButtonsVisible = Visibility.Visible;
+            }
         }
 
         public async void UpdateProductsList()
@@ -236,6 +241,10 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void GoToDeliveries() =>
           _pageService.ChangePage(new DeliveriesPage());
+
+        [RelayCommand]
+        private void GoToOrders() =>
+         _pageService.ChangePage(new OrdersPage());
 
     }
 }

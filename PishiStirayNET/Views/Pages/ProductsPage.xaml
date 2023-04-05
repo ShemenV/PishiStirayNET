@@ -38,6 +38,7 @@
                  BorderBrush="{StaticResource additionalColor}"
                  Grid.Column="0"
                      Grid.Row="0"
+                     Height="50"
                  Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  Margin="0,5,0,5" TextChanged="TextBox_TextChanged"/>
 
@@ -148,7 +149,7 @@
                             MaxWidth="590"
                             MinWidth="570"
                             Width="610"
-                            Background="{Binding CurrentDiscount, Converter = {converters:IntToBrushConverter}}"
+                            Background="{Binding CurrentDiscount, Converter = {converters:IntToBrushConverter}, UpdateSourceTrigger=PropertyChanged}"
                             BorderBrush="{StaticResource additionalColor}">
                         <Grid Height="auto"
                                 VerticalAlignment="Center"
@@ -191,7 +192,7 @@
 
                                     <TextBlock Text="Цена - "/>
 
-                                    <TextBlock Text="{Binding Price}"
+                                    <TextBlock Text="{Binding Price,  StringFormat='{}{0} ₽'}"
                                           >
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">
@@ -212,7 +213,7 @@
 
                                     <TextBlock 
                                         x:Name="newPriceTextBlock"
-                                        Text="{Binding NewPrice}"
+                                        Text="{Binding NewPrice,  StringFormat='{}{0} ₽'}"
                                            Margin="5,0"/>
 
                                 </StackPanel>
@@ -276,7 +277,11 @@
                               FontSize="13"
                               Visibility="{Binding AdminButtonsVisible}"
                               Command="{Binding GoToDeliveriesCommand}"/>
-                              
+                    <MenuItem Header="Просмотреть список заказов"
+                              FontSize="13"
+                              Visibility="{Binding AdminOrManagerButtonsVisible}"
+                              Command="{Binding GoToOrdersCommand}"/>
+
                 </ContextMenu>
             </ListView.ContextMenu>
             

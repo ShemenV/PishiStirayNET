@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PishiStirayNET.Data.DbEntities;
 
-public partial class Order1
+public partial class Order1: ObservableObject
 {
     [Key]
     public int OrderId { get; set; }

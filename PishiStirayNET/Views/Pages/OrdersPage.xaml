@@ -1,0 +1,206 @@
+﻿<Page x:Class="PishiStirayNET.Views.Pages.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PishiStirayNET.Views.Pages"
+      xmlns:usercontrols="clr-namespace:PishiStirayNET.Views.UserControls"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters ="clr-namespace:PishiStirayNET.Infrastructure.Converters"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      x:Name="OrderPage"
+      Title="Orders"
+      DataContext="{Binding OrdersPageViewModel,Source={StaticResource DI}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="30,0,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            
+            
+
+            <usercontrols:AuthorizedUserUserControl Grid.Column="1"
+                                                Margin="5,10,5,5"
+                                                    Grid.RowSpan="2"/>
+
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                      materialDesign:HintAssist.Hint="Сорртировка по цене"
+                          MinWidth="200"
+                          HorizontalAlignment="Left"
+                          Grid.Column="0"
+                          SelectedItem="{Binding SelectedOrder}"
+                          ItemsSource="{Binding OrderList}"
+                          Margin="0,0,20,0">
+
+                    </ComboBox>
+
+                    <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
+                          HorizontalAlignment="Left"
+                          MinWidth="200"
+                          SelectedItem="{Binding SelectedFilter}"
+                          ItemsSource="{Binding FiltersList}"
+                          Grid.Column="0"
+                      materialDesign:HintAssist.Hint="Фильтрация по скидке">
+
+                    </ComboBox>
+                </StackPanel>
+
+
+                <StackPanel Orientation="Vertical"
+                   Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    >
+                    <TextBlock Grid.Row="1"
+                   Grid.Column="2"
+                   Text="Количество товаров"
+                   FontSize="13"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,0,0,0"/>
+
+                    <StackPanel Orientation="Horizontal"
+                    
+                    HorizontalAlignment="Center"
+                    >
+
+                        <TextBlock 
+                    Text="{Binding CurrentProductsCount}"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,5,0"
+                />
+
+                        <TextBlock 
+                   Text="/"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,0"/>
+
+                        <TextBlock Grid.Row="0"
+                   Grid.Column="2"
+                   Text="{Binding TotalProductsCount}"
+                   FontSize="14"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <ListView Grid.Row="1"
+                  Grid.Column="0"
+                  VerticalAlignment="Top"
+                  x:Name="mainListView"
+                  Grid.ColumnSpan="2"
+                  Margin="0,10,0,0"
+                  HorizontalContentAlignment="Center"
+                  SelectedItem="{Binding SelectedOrder}"
+                  ItemsSource="{Binding OrdersList, UpdateSourceTrigger=PropertyChanged}"
+                  Height="{Binding ActualHeight, ElementName=OrderPage, Mode=OneWay, Converter={converters:SubtractConverter Value=100}}">
+
+
+
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"
+                               MaxWidth="{Binding ActualWidth, ElementName=OrderPage, Mode=OneWay}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <Border Margin="10,10"
+                            BorderThickness="3"
+                            Padding="10,0"
+                            MaxWidth="590"
+                            MinWidth="570"
+                            Width="610"
+                            Background="{Binding Orderproducts, Converter= {converters:ProductsToColorConverter}}"
+                            BorderBrush="{StaticResource additionalColor}">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="7*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <TextBlock Grid.Row="0" 
+                                       Grid.Column="0"
+                                       Text="{Binding OrderId, StringFormat='Номер заказа - {0}'}"/>
+                            <TextBlock Grid.Row="1" 
+                                       Grid.Column="0"
+                                       Text="{Binding OrderDeliveryDate, StringFormat='Дата заказа - {0:dd.MM.yyyy}'}"/>
+                            <TextBlock Grid.Row="2" 
+                                       Grid.Column="0"
+                                       Text="{Binding OrderDeliveryDateEnd, StringFormat='Дата доставки - {0:dd.MM.yyyy}'}"/>
+                            <TextBlock Grid.Row="3" 
+                                       Grid.Column="0"
+                                       Text="{Binding Fio, StringFormat='ФИО клиента - {0}'}"/>
+                            <TextBlock Grid.Row="4" 
+                                       Grid.Column="0"
+                                       Text="{Binding OrderStatusNavigation.Name, StringFormat='Статус заказа - {0}'}"/>
+
+                            <TextBlock Grid.Row="0" 
+                                       Grid.Column="1"
+                                       Text="{Binding FullPrice, StringFormat='Стоимость заказа - {0} ₽'}"/>
+
+                            <TextBlock Grid.Row="1" 
+                                       Grid.Column="1"
+                                       Text="{Binding Discount, StringFormat='Скидка - {0:f0} %'}"/>
+
+                        </Grid>
+                        
+                    </Border>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+
+            <ListView.ContextMenu>
+                <ContextMenu>
+                  
+
+                </ContextMenu>
+            </ListView.ContextMenu>
+
+
+        </ListView>
+
+        
+
+    </Grid>
+</Page>
