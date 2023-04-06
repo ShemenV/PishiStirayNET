@@ -5,7 +5,7 @@ using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -96,11 +96,25 @@ namespace PishiStirayNET.Services
                     OrderStatus = order1.OrderStatus,
                     OrderStatusNavigation = order1.OrderStatusNavigation,
                     FullPrice = (float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost),
-                    Discount =  (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost/100 * op.ProductArticleNumberNavigation.CurrentDiscount)) / ((float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost) /100),
+                    Discount = (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost / 100 * op.ProductArticleNumberNavigation.CurrentDiscount)) / ((float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost) / 100),
+                    ProductQuatities = GetProductsQuatities(order1.Orderproducts),
+
                 });
-               
+
             }
             return orders;
+        }
+
+        private List<int> GetProductsQuatities(ICollection<Orderproduct> orderproducts)
+        {
+            List<int> quantities = new List<int>();
+
+            foreach (var product in orderproducts.ToList())
+            {
+                quantities.Add(product.ProductArticleNumberNavigation.ProductQuantityInStock);
+            }
+
+            return quantities;
         }
     }
 }

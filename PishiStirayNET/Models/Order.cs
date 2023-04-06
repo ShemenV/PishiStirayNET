@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PishiStirayNET.Data.DbEntities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PishiStirayNET.Models
 {
@@ -15,5 +11,8 @@ namespace PishiStirayNET.Models
 
         [ObservableProperty]
         private float discount;
+
+        [ObservableProperty]
+        private List<int> productQuatities;
     }
 }

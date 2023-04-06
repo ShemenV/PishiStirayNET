@@ -20,6 +20,7 @@
     <None Remove="Resources\Icons\logo.png" />
     <None Remove="Resources\Icons\order.png" />
     <None Remove="Resources\Icons\order2.png" />
+    <None Remove="Resources\Icons\orders.png" />
     <None Remove="Resources\jojo-anime.gif" />
     <None Remove="Resources\picture.png" />
     <None Remove="Resources\R259E6.jpg" />
@@ -89,6 +90,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\order2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\orders.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\jojo-anime.gif">

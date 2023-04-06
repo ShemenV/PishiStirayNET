@@ -26,6 +26,7 @@ namespace PishiStirayNET.VeiwModels
         public DeliveriesPageViewModel(DeliveriesService deliveriesService)
         {
             _deliveriesService = deliveriesService;
+            LoadDataAsync();
         }
 
         private async void LoadDataAsync()
