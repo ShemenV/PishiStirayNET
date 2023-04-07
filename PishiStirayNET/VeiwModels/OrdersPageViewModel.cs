@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
 using System;
@@ -36,6 +37,8 @@ namespace PishiStirayNET.VeiwModels
 
         [ObservableProperty]
         private string? selectedSort;
+
+    
 
         partial void OnSelectedSortChanged(string? value)
         {

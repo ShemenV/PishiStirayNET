@@ -41,6 +41,7 @@ namespace PishiStirayNET
             services.AddTransient<ManufacturersPageViewModel>();
             services.AddTransient<DeliveriesPageViewModel>();
             services.AddTransient<OrdersPageViewModel>();
+            services.AddTransient<ChangeOrderPageViewModel>();
 
             #endregion
 
@@ -81,5 +82,6 @@ namespace PishiStirayNET
         public ManufacturersPageViewModel ManufacturersPageViewModel => _provider?.GetRequiredService<ManufacturersPageViewModel>();
         public DeliveriesPageViewModel DeliveriesPageViewModel => _provider?.GetRequiredService<DeliveriesPageViewModel>();
         public OrdersPageViewModel OrdersPageViewModel => _provider?.GetRequiredService<OrdersPageViewModel>();
+        public ChangeOrderPageViewModel ChangeOrderPageViewModel => _provider?.GetRequiredService<ChangeOrderPageViewModel>();
     }
 }

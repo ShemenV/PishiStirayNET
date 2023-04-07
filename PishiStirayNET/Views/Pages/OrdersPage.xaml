@@ -315,14 +315,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
-
                     <ListView.ContextMenu>
                         <ContextMenu>
-
-
+                            <MenuItem Header="Изменить" />
                         </ContextMenu>
                     </ListView.ContextMenu>
-
 
                 </ListView>
             </StackPanel>
