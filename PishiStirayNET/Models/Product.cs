@@ -3,21 +3,9 @@ using System.IO;
 
 namespace PishiStirayNET.Models
 {
-    public class Product
+    public class Product:ProductDB
     {
-        public string? Article { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? ManufacturerName { get; set; }
-        public float? Price { get; set; }
-        public int? MaxQuantity { get; set; }
-        public float? CurrentDiscount { get; set; }
-        public ProductCategory Category { get; set; }
-        public Manufacturer Manufacturer { get; set; }
-        public Delivery Delivery { get; set; }
-        public Unit Unit { get; set; }
-        public int? MaxDiscount { get; set; }
-        public int IsDeleted { get; set; }
+      
 
 
         public string Image { get; set; }
@@ -38,7 +26,7 @@ namespace PishiStirayNET.Models
             {
                 if (CurrentDiscount != 0)
                 {
-                    return Price - (Price * (CurrentDiscount / 100));
+                    return (float?)((float)ProductCost - ((float)ProductCost * ((float?)CurrentDiscount / 100))) ;
                 }
                 return 0;
             }
@@ -52,6 +40,6 @@ namespace PishiStirayNET.Models
             }
         }
 
-        public int? ProductQuantityInStock { get; internal set; }
+      
     }
 }

@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Services;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -33,6 +35,46 @@ namespace PishiStirayNET.VeiwModels
         {
             DeliveriesList = await _deliveriesService.GetAllDeliveriesAsync();
             Name = string.Empty;
+        }
+
+        [RelayCommand]
+        private void ChangeDelivery()
+        {
+            IsChanged = true;
+            Name = SelectedDelivery.Name;
+        }
+
+        [RelayCommand]
+        private async void SendDelivery()
+        {
+            Delivery delivery = new ();
+            delivery.Name = Name;
+
+            if (IsChanged == true)
+            {
+                delivery.IdProvider = SelectedDelivery.IdProvider;
+                _deliveriesService.ChangeDelivery(delivery);
+                IsChanged = false;
+                await Task.Delay(200);
+                LoadDataAsync();
+                return;
+            }
+            else
+            {
+
+                _deliveriesService.AddDelivery(delivery);
+                await Task.Delay(90);
+                LoadDataAsync();
+            }
+
+        }
+
+        [RelayCommand]
+        private void CancelChange()
+        {
+            IsChanged = false;
+            Name = string.Empty;
+            SelectedDelivery = null;
         }
     }
 }

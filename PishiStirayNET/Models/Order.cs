@@ -14,5 +14,10 @@ namespace PishiStirayNET.Models
 
         [ObservableProperty]
         private List<int> productQuatities;
+
+        [ObservableProperty]
+        private List<Product> products;
     }
+
+
 }

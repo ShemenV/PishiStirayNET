@@ -94,7 +94,7 @@
                     Margin="70 50"
                     Height="60"
                     Content="Сохранить"
-                    Command="{Binding  SendDeliveriesCommand}"/>
+                    Command="{Binding  SendDeliveryCommand, IsAsync=True}"/>
 
             <Button Grid.Row="2"
                     Margin="70 0"

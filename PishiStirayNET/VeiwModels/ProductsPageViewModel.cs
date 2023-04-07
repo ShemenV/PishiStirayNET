@@ -112,7 +112,7 @@ namespace PishiStirayNET.VeiwModels
 
             if (SearchQuery != null)
             {
-                products = products.Where(p => p.Title.ToLower().Trim().Contains(SearchQuery.ToLower().Trim())).ToList();
+                products = products.Where(p => p.ProductName.ToLower().Trim().Contains(SearchQuery.ToLower().Trim())).ToList();
             }
 
             switch (SelectedFilter)
@@ -146,7 +146,7 @@ namespace PishiStirayNET.VeiwModels
                         {
                             return p.NewPrice;
                         }
-                        return p.Price;
+                        return (float?)p.ProductCost;
                     }).ToList();
 
                     break;
@@ -158,7 +158,7 @@ namespace PishiStirayNET.VeiwModels
                         {
                             return p.NewPrice;
                         }
-                        return p.Price;
+                        return (float?)p.ProductCost;
                     }).ToList();
                     break;
             }
@@ -174,7 +174,7 @@ namespace PishiStirayNET.VeiwModels
         {
             if (SelectedProduct != null)
             {
-                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Product.Article == SelectedProduct.Article);
+                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Product.ProductArticleNumber == SelectedProduct.ProductArticleNumber   );
                 if (cartItem == null)
                 {
                     Cart.CartProductList.Add(new CartItem
@@ -186,7 +186,7 @@ namespace PishiStirayNET.VeiwModels
                 }
                 else
                 {
-                    if (cartItem.Count < cartItem.Product.MaxQuantity)
+                    if (cartItem.Count < cartItem.Product.ProductQuantityInStock)
                     {
                         cartItem.Count++;
                     }
@@ -214,7 +214,7 @@ namespace PishiStirayNET.VeiwModels
         private void GoToChangeProductPage()
         {
             ChangedObjects.Product = SelectedProduct;
-            Debug.WriteLine(SelectedProduct.Category.NameCategory);
+            Debug.WriteLine(SelectedProduct.ProductCategoryNavigation.NameCategory);
 
             _pageService.ChangePage(new CangeProductPage());
         }

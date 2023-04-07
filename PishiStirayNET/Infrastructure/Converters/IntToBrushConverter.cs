@@ -10,7 +10,7 @@ namespace PishiStirayNET.Infrastructure.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            float? number = (float?)value;
+            sbyte? number = (sbyte?)value;
 
             if (number == null || number <= 15)
             {

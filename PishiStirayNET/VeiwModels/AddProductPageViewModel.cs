@@ -115,17 +115,15 @@ namespace PishiStirayNET.VeiwModels
                 if (ChangedObjects.Product != null)
                 {
 
-                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedObjects.Product.Category)];
-                    Debug.WriteLine(ProductCategories.IndexOf(ChangedObjects.Product.Category));
-                    SelectedManufacturer = ChangedObjects.Product.Manufacturer;
-                    SelectedDelivery = ChangedObjects.Product.Delivery;
-                    SelectedUnit = ChangedObjects.Product.Unit;
-                    Title = ChangedObjects.Product.Title;
-                    Description = ChangedObjects.Product.Description;
-                    Price = ChangedObjects.Product.Price;
+                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedObjects.Product.ProductCategoryNavigation)];
+                    SelectedManufacturer = ChangedObjects.Product.ProductManufacturerNavigation;
+                    SelectedDelivery = ChangedObjects.Product.DeliveryNavigation;
+                    SelectedUnit = ChangedObjects.Product.UnitOfMeasurementNavigation;
+                    Title = ChangedObjects.Product.ProductName;
+                    Description = ChangedObjects.Product.ProductDescription;
+                    Price = (float?)ChangedObjects.Product.ProductCost;
                     CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
-                    MaxDiscount = ChangedObjects.Product.MaxDiscount;
-                    MaxCount = ChangedObjects.Product.MaxQuantity;
+                    MaxCount = ChangedObjects.Product.ProductQuantityInStock;
                     SelectedPath = ChangedObjects.Product.Image;
 
                 }

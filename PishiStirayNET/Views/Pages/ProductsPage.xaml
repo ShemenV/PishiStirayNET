@@ -126,6 +126,7 @@
                   VerticalAlignment="Top"
                   x:Name="mainListView"
                   Grid.ColumnSpan="2"
+                  
                   Margin="0,10,0,0"
                   HorizontalContentAlignment="Center"
                   SelectedItem="{Binding SelectedProduct}"
@@ -144,6 +145,7 @@
             <ListView.ItemTemplate >
                 <DataTemplate >
                     <Border Margin="10,10"
+                            
                             BorderThickness="3"
                             Padding="10,0"
                             MaxWidth="590"
@@ -174,14 +176,15 @@
                          >
                                 <TextBlock FontWeight="Bold"
                                        Margin="2,3"
-                                       Text="{Binding Title}"/>
+                                       Text="{Binding ProductName}"/>
 
-                                <TextBlock Text="{Binding Description}"
+                                <TextBlock Text="{Binding ProductDescription}"
                                        TextWrapping="Wrap"
                                          
                                        Margin="2,3,4,3"/>
 
-                                <TextBlock DataContext="{Binding Manufacturer, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBlock DataContext="{Binding ProductManufacturerNavigation
+                                    , UpdateSourceTrigger=PropertyChanged}"
                                     Text="{Binding Name, 
                                 StringFormat='Производитель - {0}', UpdateSourceTrigger=PropertyChanged}"
                                             Margin="0,7"/>
@@ -192,7 +195,7 @@
 
                                     <TextBlock Text="Цена - "/>
 
-                                    <TextBlock Text="{Binding Price,  StringFormat='{}{0} ₽'}"
+                                    <TextBlock Text="{Binding ProductCost,  StringFormat='{}{0} ₽'}"
                                           >
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">

@@ -12,9 +12,9 @@ namespace PishiStirayNET.Models
         [NotifyPropertyChangedFor(nameof(Cost))]
         private int count;
 
-        public float? Cost => Product?.Price * Count;
+        public float? Cost => (float?)(Product?.ProductCost * Count);
 
-        public float? Discount => Product?.Price * Count - Product?.NewPrice * Count;
+        public float? Discount => (float?)(Product?.ProductCost * Count) - Product?.NewPrice * Count;
 
     }
 }

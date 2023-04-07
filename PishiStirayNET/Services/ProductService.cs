@@ -38,18 +38,18 @@ namespace PishiStirayNET.Services
                 {
                     products.Add(new Models.Product
                     {
-                        Article = product.ProductArticleNumber,
+                        ProductArticleNumber = product.ProductArticleNumber,
                         CurrentDiscount = product.CurrentDiscount,
-                        Description = product.ProductDescription,
+                        ProductDescription = product.ProductDescription,
                         Image = (product.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductPhoto) == true) ? "picture.png" : product.ProductPhoto,
-                        Price = ((float)product.ProductCost),
-                        Manufacturer = product.ProductManufacturerNavigation,
-                        Title = product.ProductName,
-                        MaxQuantity = product.ProductQuantityInStock,
-                        Category = product.ProductCategoryNavigation,
-                        Delivery = product.DeliveryNavigation,
-                        Unit = product.UnitOfMeasurementNavigation,
-                        MaxDiscount = product.ProductDiscountAmount
+                        ProductCost = (product.ProductCost),
+                        ProductManufacturerNavigation = product.ProductManufacturerNavigation,
+                        ProductName = product.ProductName,
+                        ProductQuantityInStock = product.ProductQuantityInStock,
+                        ProductCategoryNavigation = product.ProductCategoryNavigation,
+                        Delivery = product.Delivery,
+                        UnitOfMeasurementNavigation = product.UnitOfMeasurementNavigation,
+                        ProductDiscountAmount = product.ProductDiscountAmount,
                     });
                 }
 
@@ -79,18 +79,18 @@ namespace PishiStirayNET.Services
                 {
                     products.Add(new Models.Product
                     {
-                        Article = product.ProductArticleNumber,
+                        ProductArticleNumber = product.ProductArticleNumber,
                         CurrentDiscount = product.CurrentDiscount,
-                        Description = product.ProductDescription,
+                        ProductDescription = product.ProductDescription,
                         Image = (product.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductPhoto) == true) ? "picture.png" : product.ProductPhoto,
-                        Price = ((float)product.ProductCost),
-                        Manufacturer = product.ProductManufacturerNavigation,
-                        Title = product.ProductName,
-                        MaxQuantity = product.ProductQuantityInStock,
-                        Category = product.ProductCategoryNavigation,
-                        Delivery = product.DeliveryNavigation,
-                        Unit = product.UnitOfMeasurementNavigation,
-                        MaxDiscount = product.ProductDiscountAmount
+                        ProductCost = (product.ProductCost),
+                        ProductManufacturerNavigation = product.ProductManufacturerNavigation,
+                        ProductName = product.ProductName,
+                        ProductQuantityInStock = product.ProductQuantityInStock,
+                        ProductCategoryNavigation = product.ProductCategoryNavigation,
+                        Delivery = product.Delivery,
+                        UnitOfMeasurementNavigation = product.UnitOfMeasurementNavigation,
+                        ProductDiscountAmount = product.ProductDiscountAmount
                     });
                 }
 
@@ -112,7 +112,7 @@ namespace PishiStirayNET.Services
             {
                 foreach (Product product in products)
                 {
-                    CartItem? cartItem = Cart.CartProductList.Where(i => i.Product.Article == product.Article).FirstOrDefault();
+                    CartItem? cartItem = Cart.CartProductList.Where(i => i.Product.ProductArticleNumber == product.ProductArticleNumber).FirstOrDefault();
                     if (cartItem != null)
                     {
 
@@ -208,7 +208,7 @@ namespace PishiStirayNET.Services
 
         public async void DeleteProduct(Product productDB)
         {
-            ProductDB? product = await _context.Products.Where(p => p.ProductArticleNumber == productDB.Article).SingleOrDefaultAsync();
+            ProductDB? product = await _context.Products.Where(p => p.ProductArticleNumber == productDB.ProductArticleNumber).SingleOrDefaultAsync();
 
             if (product != null)
             {

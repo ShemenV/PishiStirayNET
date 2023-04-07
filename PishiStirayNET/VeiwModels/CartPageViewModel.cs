@@ -103,7 +103,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void IncreaseSelectedCartItemCount()
         {
-            if (SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.MaxQuantity)
+            if (SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.ProductQuantityInStock)
             {
                 SelectedCartItem.Count++;
                 Count = SelectedCartItem.Count;
@@ -126,7 +126,7 @@ namespace PishiStirayNET.VeiwModels
 
         private bool CanChangeCount()
         {
-            return SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.MaxQuantity;
+            return SelectedCartItem != null && SelectedCartItem.Count > 0 && Count < SelectedCartItem.Product.ProductQuantityInStock;
         }
 
 

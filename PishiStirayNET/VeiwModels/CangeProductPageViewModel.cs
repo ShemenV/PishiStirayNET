@@ -120,7 +120,7 @@ namespace PishiStirayNET.VeiwModels
                     int index = 0;
                     for (int i = 0; i < ProductCategories.Count; i++)
                     {
-                        if (ProductCategories[i].IdCategory == ChangedObjects.Product.Category.IdCategory)
+                        if (ProductCategories[i].IdCategory == ChangedObjects.Product.ProductCategoryNavigation.IdCategory)
                         {
                             index = i; break;
                         }
@@ -130,7 +130,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Manufacturers.Count; i++)
                     {
-                        if (Manufacturers[i].IdManafacturer == ChangedObjects.Product.Manufacturer.IdManafacturer)
+                        if (Manufacturers[i].IdManafacturer == ChangedObjects.Product.ProductManufacturerNavigation.IdManafacturer)
                         {
                             index = i; break;
                         }
@@ -141,7 +141,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Deliveries.Count; i++)
                     {
-                        if (Deliveries[i].IdProvider == ChangedObjects.Product.Delivery.IdProvider)
+                        if (Deliveries[i].IdProvider == ChangedObjects.Product.Delivery)
                         {
                             index = i; break;
                         }
@@ -152,19 +152,18 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Units.Count; i++)
                     {
-                        if (Units[i].IdUnit == ChangedObjects.Product.Unit.IdUnit)
+                        if (Units[i].IdUnit == ChangedObjects.Product.UnitOfMeasurement)
                         {
                             index = i; break;
                         }
                     }
                     SelectedUnit = Units[index];
 
-                    Title = ChangedObjects.Product.Title;
-                    Description = ChangedObjects.Product.Description;
-                    Price = ChangedObjects.Product.Price;
+                    Title = ChangedObjects.Product.ProductName;
+                    Description = ChangedObjects.Product.ProductDescription;
+                    Price = (float?)ChangedObjects.Product.ProductCost;
                     CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
-                    MaxDiscount = ChangedObjects.Product.MaxDiscount;
-                    MaxCount = ChangedObjects.Product.MaxQuantity;
+                    MaxCount = ChangedObjects.Product.ProductQuantityInStock;
                     SelectedPath = ChangedObjects.Product.Image;
                     ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
                 }
@@ -194,7 +193,7 @@ namespace PishiStirayNET.VeiwModels
 
                 _productService.ChangeProduct(new ProductDB
                 {
-                    ProductArticleNumber = ChangedObjects.Product.Article,
+                    ProductArticleNumber = ChangedObjects.Product.ProductArticleNumber,
                     ProductName = Title,
                     ProductDescription = Description,
                     ProductCategory = SelectedCategory.IdCategory,

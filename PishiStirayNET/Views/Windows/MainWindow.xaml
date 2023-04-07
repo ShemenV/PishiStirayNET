@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PishiStirayNET"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="550" 
+        Height="650" 
         DataContext="{Binding MainWindowViewModel, Source={StaticResource DI}}"
-        Width="800" Icon="/Views/Windows/logo.png">
+        Width="1350" Icon="/Views/Windows/logo.png">
 
     <Frame Content="{Binding PageSource}"
            NavigationUIVisibility="Visible"/>

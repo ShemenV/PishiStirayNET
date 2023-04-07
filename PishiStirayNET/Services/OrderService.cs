@@ -56,14 +56,14 @@ namespace PishiStirayNET.Services
                 orderproductList.Add(new Orderproduct
                 {
                     OrderId = orderNumber,
-                    ProductArticleNumber = cartItem.Product.Article,
+                    ProductArticleNumber = cartItem.Product.ProductArticleNumber,
                     Count = cartItem.Count
                 });
             }
 
             foreach (CartItem cartItem in cartItems)
             {
-                ProductDB? product = await _tradeContext.Products.Where(p => p.ProductArticleNumber == cartItem.Product.Article).SingleOrDefaultAsync();
+                ProductDB? product = await _tradeContext.Products.Where(p => p.ProductArticleNumber == cartItem.Product.ProductArticleNumber).SingleOrDefaultAsync();
 
                 if (product != null)
                 {
@@ -96,8 +96,9 @@ namespace PishiStirayNET.Services
                     OrderStatus = order1.OrderStatus,
                     OrderStatusNavigation = order1.OrderStatusNavigation,
                     FullPrice = (float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost),
-                    Discount = (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost / 100 * op.ProductArticleNumberNavigation.CurrentDiscount)) / ((float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost) / 100),
+                    Discount = (float)order1.Orderproducts.ToList().Sum(op => op.Count * (Convert.ToSingle(op.ProductArticleNumberNavigation.ProductCost) / 100 * (float)op.ProductArticleNumberNavigation.CurrentDiscount)) / ((float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost) / 100),
                     ProductQuatities = GetProductsQuatities(order1.Orderproducts),
+                    Products = await GetProducts(order1.Orderproducts),
 
                 });
 
@@ -115,6 +116,33 @@ namespace PishiStirayNET.Services
             }
 
             return quantities;
+        }
+
+        private async Task<List<Product>> GetProducts(ICollection<Orderproduct> orderproducts)
+        {
+            List<Product> products = new List<Product>();
+
+            foreach(var product in orderproducts.ToList())
+            {
+                products.Add(new Product
+                {
+                    ProductArticleNumber = product.ProductArticleNumberNavigation.ProductArticleNumber,
+                    CurrentDiscount = product.ProductArticleNumberNavigation.CurrentDiscount,
+                    ProductDescription = product.ProductArticleNumberNavigation.ProductDescription,
+                    Image = (product.ProductArticleNumberNavigation.ProductPhoto == null || string.IsNullOrWhiteSpace(product.ProductArticleNumberNavigation.ProductPhoto) == true) ? "picture.png" : product.ProductArticleNumberNavigation.ProductPhoto,
+                    ProductCost = (product.ProductArticleNumberNavigation.ProductCost),
+                    ProductManufacturerNavigation = product.ProductArticleNumberNavigation.ProductManufacturerNavigation,
+                    ProductName = product.ProductArticleNumberNavigation.ProductName,
+                    ProductQuantityInStock = product.ProductArticleNumberNavigation.ProductQuantityInStock,
+                    ProductCategoryNavigation = product.ProductArticleNumberNavigation.ProductCategoryNavigation,
+                    Delivery = product.ProductArticleNumberNavigation.Delivery,
+                    UnitOfMeasurementNavigation = product.ProductArticleNumberNavigation.UnitOfMeasurementNavigation,
+                    ProductDiscountAmount = product.ProductArticleNumberNavigation.ProductDiscountAmount,
+
+                });
+            }
+
+            return products;
         }
     }
 }
