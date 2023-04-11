@@ -91,7 +91,7 @@ namespace PishiStirayNET.VeiwModels
             _productService = productService;
             _orderService = orderService;
 
-            cartProductsList = Cart.CartProductList;
+            cartProductsList = Global.CartProductList;
 
             Task.Run(async () =>
             {

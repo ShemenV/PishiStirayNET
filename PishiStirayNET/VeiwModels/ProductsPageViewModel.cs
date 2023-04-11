@@ -93,12 +93,12 @@ namespace PishiStirayNET.VeiwModels
 
             SelectedFilter = filtersList[0];
 
-            if (CurrentUser.User != null && CurrentUser.User.UserRole == 1)
+            if (Global.User != null && Global.User.UserRole == 1)
             {
                 AdminButtonsVisible = Visibility.Visible;
-                AdminOrManagerButtonsVisible= Visibility.Visible;
+                AdminOrManagerButtonsVisible = Visibility.Visible;
             }
-            else if(CurrentUser.User != null && CurrentUser.User.UserRole == 3)
+            else if (Global.User != null && Global.User.UserRole == 3)
             {
                 AdminOrManagerButtonsVisible = Visibility.Visible;
             }
@@ -174,10 +174,10 @@ namespace PishiStirayNET.VeiwModels
         {
             if (SelectedProduct != null)
             {
-                CartItem? cartItem = Cart.CartProductList.SingleOrDefault(p => p.Product.ProductArticleNumber == SelectedProduct.ProductArticleNumber   );
+                CartItem? cartItem = Global.CartProductList.SingleOrDefault(p => p.Product.ProductArticleNumber == SelectedProduct.ProductArticleNumber);
                 if (cartItem == null)
                 {
-                    Cart.CartProductList.Add(new CartItem
+                    Global.CartProductList.Add(new CartItem
                     {
                         Product = SelectedProduct,
                         Count = 1
@@ -190,7 +190,7 @@ namespace PishiStirayNET.VeiwModels
                     {
                         cartItem.Count++;
                     }
-                    Debug.WriteLine(Cart.CartProductList.IndexOf(cartItem));
+                    Debug.WriteLine(Global.CartProductList.IndexOf(cartItem));
                 }
 
             }
@@ -213,7 +213,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void GoToChangeProductPage()
         {
-            ChangedObjects.Product = SelectedProduct;
+            Global.Product = SelectedProduct;
             Debug.WriteLine(SelectedProduct.ProductCategoryNavigation.NameCategory);
 
             _pageService.ChangePage(new CangeProductPage());

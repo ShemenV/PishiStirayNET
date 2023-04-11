@@ -112,7 +112,7 @@ namespace PishiStirayNET.VeiwModels
                 Deliveries = await _productService.GetDeliveriesAsync();
                 Units = await _productService.GetUnitAsync();
 
-                if (ChangedObjects.Product != null && ProductCategories != null)
+                if (Global.Product != null && ProductCategories != null)
                 {
 
                     SelectedCategory = ProductCategories[0];
@@ -120,7 +120,7 @@ namespace PishiStirayNET.VeiwModels
                     int index = 0;
                     for (int i = 0; i < ProductCategories.Count; i++)
                     {
-                        if (ProductCategories[i].IdCategory == ChangedObjects.Product.ProductCategoryNavigation.IdCategory)
+                        if (ProductCategories[i].IdCategory == Global.Product.ProductCategoryNavigation.IdCategory)
                         {
                             index = i; break;
                         }
@@ -130,7 +130,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Manufacturers.Count; i++)
                     {
-                        if (Manufacturers[i].IdManafacturer == ChangedObjects.Product.ProductManufacturerNavigation.IdManafacturer)
+                        if (Manufacturers[i].IdManafacturer == Global.Product.ProductManufacturerNavigation.IdManafacturer)
                         {
                             index = i; break;
                         }
@@ -141,7 +141,7 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Deliveries.Count; i++)
                     {
-                        if (Deliveries[i].IdProvider == ChangedObjects.Product.Delivery)
+                        if (Deliveries[i].IdProvider == Global.Product.Delivery)
                         {
                             index = i; break;
                         }
@@ -152,19 +152,19 @@ namespace PishiStirayNET.VeiwModels
                     index = 0;
                     for (int i = 0; i < Units.Count; i++)
                     {
-                        if (Units[i].IdUnit == ChangedObjects.Product.UnitOfMeasurement)
+                        if (Units[i].IdUnit == Global.Product.UnitOfMeasurement)
                         {
                             index = i; break;
                         }
                     }
                     SelectedUnit = Units[index];
 
-                    Title = ChangedObjects.Product.ProductName;
-                    Description = ChangedObjects.Product.ProductDescription;
-                    Price = (float?)ChangedObjects.Product.ProductCost;
-                    CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
-                    MaxCount = ChangedObjects.Product.ProductQuantityInStock;
-                    SelectedPath = ChangedObjects.Product.Image;
+                    Title = Global.Product.ProductName;
+                    Description = Global.Product.ProductDescription;
+                    Price = (float?)Global.Product.ProductCost;
+                    CurrentDiscount = Global.Product.CurrentDiscount;
+                    MaxCount = Global.Product.ProductQuantityInStock;
+                    SelectedPath = Global.Product.Image;
                     ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
                 }
             }
@@ -193,7 +193,7 @@ namespace PishiStirayNET.VeiwModels
 
                 _productService.ChangeProduct(new ProductDB
                 {
-                    ProductArticleNumber = ChangedObjects.Product.ProductArticleNumber,
+                    ProductArticleNumber = Global.Product.ProductArticleNumber,
                     ProductName = Title,
                     ProductDescription = Description,
                     ProductCategory = SelectedCategory.IdCategory,
@@ -206,7 +206,7 @@ namespace PishiStirayNET.VeiwModels
                     UnitOfMeasurement = SelectedUnit.IdUnit,
                     Delivery = SelectedDelivery.IdProvider
                 });
-                ChangedObjects.Product = null;
+                Global.Product = null;
 
                 await Task.Delay(60);
 

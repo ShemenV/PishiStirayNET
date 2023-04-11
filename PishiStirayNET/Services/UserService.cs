@@ -25,7 +25,7 @@ namespace PishiStirayNET.Services
             if (user != null)
             {
 
-                CurrentUser.User = user;
+                Global.User = user;
 
                 return true;
             }

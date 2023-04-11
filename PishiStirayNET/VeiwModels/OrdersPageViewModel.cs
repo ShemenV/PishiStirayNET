@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PishiStirayNET.Data.DbEntities;
+using CommunityToolkit.Mvvm.Input;
+using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
-using System;
+using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,12 +12,14 @@ namespace PishiStirayNET.VeiwModels
     public partial class OrdersPageViewModel : ObservableValidator
     {
         private readonly OrderService _orderService;
+        private readonly PageService _pageService;
 
-        public OrdersPageViewModel(OrderService orderService)
+        public OrdersPageViewModel(OrderService orderService, PageService pageService)
         {
             _orderService = orderService;
+            _pageService = pageService;
 
-            SelectedFilter = filtersList[0];
+            SelectedFilter = FiltersList[0];
         }
 
 
@@ -38,17 +41,14 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private string? selectedSort;
 
-    
+
 
         partial void OnSelectedSortChanged(string? value)
         {
             UpdateOrdersList();
         }
 
-        private void UpdateProductsList()
-        {
-            throw new NotImplementedException();
-        }
+
 
         partial void OnSelectedFilterChanged(string? value)
         {
@@ -97,8 +97,19 @@ namespace PishiStirayNET.VeiwModels
                     }).ToList();
                     break;
             }
+
             OrdersList = orders;
         }
 
+
+        [RelayCommand]
+        private void GoToChangePage()
+        {
+            if (SelectedOrder != null)
+            {
+                Global.Order = SelectedOrder;
+                _pageService.ChangePage(new ChangeOrderPage());
+            }
+        }
     }
 }

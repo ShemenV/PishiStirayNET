@@ -112,7 +112,7 @@ namespace PishiStirayNET.Services
             {
                 foreach (Product product in products)
                 {
-                    CartItem? cartItem = Cart.CartProductList.Where(i => i.Product.ProductArticleNumber == product.ProductArticleNumber).FirstOrDefault();
+                    CartItem? cartItem = Global.CartProductList.Where(i => i.Product.ProductArticleNumber == product.ProductArticleNumber).FirstOrDefault();
                     if (cartItem != null)
                     {
 

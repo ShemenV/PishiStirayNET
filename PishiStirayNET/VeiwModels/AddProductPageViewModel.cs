@@ -112,19 +112,19 @@ namespace PishiStirayNET.VeiwModels
                 Deliveries = await _productService.GetDeliveriesAsync();
                 Units = await _productService.GetUnitAsync();
 
-                if (ChangedObjects.Product != null)
+                if (Global.Product != null)
                 {
 
-                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(ChangedObjects.Product.ProductCategoryNavigation)];
-                    SelectedManufacturer = ChangedObjects.Product.ProductManufacturerNavigation;
-                    SelectedDelivery = ChangedObjects.Product.DeliveryNavigation;
-                    SelectedUnit = ChangedObjects.Product.UnitOfMeasurementNavigation;
-                    Title = ChangedObjects.Product.ProductName;
-                    Description = ChangedObjects.Product.ProductDescription;
-                    Price = (float?)ChangedObjects.Product.ProductCost;
-                    CurrentDiscount = ChangedObjects.Product.CurrentDiscount;
-                    MaxCount = ChangedObjects.Product.ProductQuantityInStock;
-                    SelectedPath = ChangedObjects.Product.Image;
+                    SelectedCategory = ProductCategories[ProductCategories.IndexOf(Global.Product.ProductCategoryNavigation)];
+                    SelectedManufacturer = Global.Product.ProductManufacturerNavigation;
+                    SelectedDelivery = Global.Product.DeliveryNavigation;
+                    SelectedUnit = Global.Product.UnitOfMeasurementNavigation;
+                    Title = Global.Product.ProductName;
+                    Description = Global.Product.ProductDescription;
+                    Price = (float?)Global.Product.ProductCost;
+                    CurrentDiscount = Global.Product.CurrentDiscount;
+                    MaxCount = Global.Product.ProductQuantityInStock;
+                    SelectedPath = Global.Product.Image;
 
                 }
             }

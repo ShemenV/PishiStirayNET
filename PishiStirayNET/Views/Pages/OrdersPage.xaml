@@ -279,9 +279,9 @@
                                     <TextBlock Grid.Row="1" 
                                        Grid.Column="0"
                                        Text="{Binding OrderDeliveryDate, StringFormat='Дата заказа - {0:dd.MM.yyyy}'}"/>
-                                    <TextBlock Grid.Row="2" 
+                                    <DatePicker Grid.Row="2" 
                                        Grid.Column="0"
-                                       Text="{Binding OrderDeliveryDateEnd, StringFormat='Дата доставки - {0:dd.MM.yyyy}'}"/>
+                                       SelectedDate="{Binding OrderDeliveryDateEnd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Дата доставки - {0:dd.MM.yyyy}'}"/>
                                     <TextBlock Grid.Row="3" 
                                        Grid.Column="0"
                                        Text="{Binding Fio, StringFormat='ФИО клиента - {0}'}"/>
@@ -317,7 +317,7 @@
 
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Изменить" />
+                            <MenuItem Header="Изменить" Command="{Binding GoToChangePageCommand}"/>
                         </ContextMenu>
                     </ListView.ContextMenu>
 

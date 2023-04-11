@@ -24,10 +24,10 @@ namespace PishiStirayNET.VeiwModels
         {
 
             _pageService = pageService;
-            if (CurrentUser.User != null)
+            if (Global.User != null)
             {
-                Fullname = CurrentUser.User.UserSurname + " " + CurrentUser.User.UserName + " " + CurrentUser.User.UserPatronymic;
-                Role = CurrentUser.User.UserRoleNavigation.RoleName;
+                Fullname = Global.User.UserSurname + " " + Global.User.UserName + " " + Global.User.UserPatronymic;
+                Role = Global.User.UserRoleNavigation.RoleName;
                 IsAuthorized = true;
             }
             else
@@ -41,7 +41,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void LogOut()
         {
-            CurrentUser.User = null;
+            Global.User = null;
             IsAuthorized = false;
             _pageService.ChangePage(new SignInPage());
         }

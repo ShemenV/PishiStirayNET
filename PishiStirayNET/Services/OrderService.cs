@@ -45,7 +45,7 @@ namespace PishiStirayNET.Services
                 OrderDeliveryDate = DateTime.Now,
                 OrderDeliveryDateEnd = DateTime.Now.AddYears(6),
                 OrderPickupPoint = issuepointID,
-                Fio = CurrentUser.User != null ? $"{CurrentUser.User.UserSurname} {CurrentUser.User.UserName} {CurrentUser.User.UserPatronymic}" : null,
+                Fio = Global.User != null ? $"{Global.User.UserSurname} {Global.User.UserName} {Global.User.UserPatronymic}" : null,
                 CodePoluch = receiptСode
             });
 
@@ -122,7 +122,7 @@ namespace PishiStirayNET.Services
         {
             List<Product> products = new List<Product>();
 
-            foreach(var product in orderproducts.ToList())
+            foreach (var product in orderproducts.ToList())
             {
                 products.Add(new Product
                 {
@@ -143,6 +143,30 @@ namespace PishiStirayNET.Services
             }
 
             return products;
+        }
+
+        public async Task<List<OrderStatus>> GetOrderStatuses()
+        {
+            return await _tradeContext.OrderStatuses.ToListAsync();
+        }
+
+        public async void ChangeOrder(Order order)
+        {
+
+            Order1 newOrder = await _tradeContext.Order1s.Where(o => o.OrderId == order.OrderId).FirstOrDefaultAsync();
+
+            if (newOrder != null)
+            {
+                newOrder.OrderDeliveryDateEnd = order.OrderDeliveryDateEnd;
+                newOrder.OrderStatus = order.OrderStatus;
+
+                await _tradeContext.SaveChangesAsync();
+            }
+
+
+
+
+
         }
     }
 }
