@@ -178,7 +178,7 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand]
         private void ChangePhoto()
         {
-            SelectedPath = _saveFileDialogService.SaveFileDialog();
+            SelectedPath = _saveFileDialogService.ImageSaveFileDialog();
             ImagePath = new(new Uri(Path.GetFullPath($"Resources/{SelectedPath}"), UriKind.Absolute));
             Debug.WriteLine(SelectedPath);
         }

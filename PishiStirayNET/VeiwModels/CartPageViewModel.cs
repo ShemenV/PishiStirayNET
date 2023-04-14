@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel.__Internals;
 using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -17,6 +19,9 @@ namespace PishiStirayNET.VeiwModels
     {
         private readonly ProductService _productService;
         private readonly OrderService _orderService;
+        private readonly DocumentService _documentSevice;
+        private readonly SaveFileDialogService _saveFileDialogService;
+        private readonly PageService _pageService;
 
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(TotalPrice))]
@@ -86,7 +91,7 @@ namespace PishiStirayNET.VeiwModels
 
 
 
-        public CartPageViewModel(ProductService productService, OrderService orderService)
+        public CartPageViewModel(ProductService productService, OrderService orderService, DocumentService documentSevice, SaveFileDialogService saveFileDialogService, PageService pageService)
         {
             _productService = productService;
             _orderService = orderService;
@@ -97,6 +102,9 @@ namespace PishiStirayNET.VeiwModels
             {
                 IssuePoints = await _orderService.GetIssuePointsAsync();
             });
+            _documentSevice = documentSevice;
+            _saveFileDialogService = saveFileDialogService;
+            _pageService = pageService; 
         }
 
 
@@ -133,8 +141,19 @@ namespace PishiStirayNET.VeiwModels
         [RelayCommand(CanExecute = nameof(CanCreateOrder))]
         private async void CreateOrder()
         {
-            _orderService.CreateOrder(CartProductsList.ToList(), SelectedIssuepoint.IdPunkta);
+            Order order = await _orderService.CreateOrder(CartProductsList.ToList(), SelectedIssuepoint.IdPunkta);
+
+            
+
+            string selectedFolder = "";
+            selectedFolder = _saveFileDialogService.PDFSaveFileDialog();
+            if (selectedFolder != "no folder")
+            {
+                _documentSevice.CreateDocument(order, selectedFolder);
+            }
+           
             CartProductsList.Clear();
+            _pageService.ChangePage(new ProductsPage());
         }
 
         private bool CanCreateOrder()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Ookii.Dialogs.Wpf;
 using System.IO;
 
 namespace PishiStirayNET.Services
@@ -7,7 +8,7 @@ namespace PishiStirayNET.Services
     {
         public string FilePath { get; set; }
 
-        public string SaveFileDialog()
+        public string ImageSaveFileDialog()
         {
             OpenFileDialog saveFileDialog = new();
             saveFileDialog.Filter = "Файлы изображений (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png";
@@ -55,5 +56,26 @@ namespace PishiStirayNET.Services
             }
             return FilePath;
         }
+        
+        public string PDFSaveFileDialog()
+        {
+            VistaFolderBrowserDialog saveFileDialog = new();
+           
+
+            var result = saveFileDialog.ShowDialog();
+            if (result == true)
+            {
+                return saveFileDialog.SelectedPath;
+
+                
+
+              
+
+
+              
+            }
+            return "no folder";
+        }
+
     }
 }

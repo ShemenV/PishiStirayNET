@@ -21,6 +21,7 @@ namespace PishiStirayNET
             services.AddScoped<PageService>();
             services.AddTransient<ProductService>();
             services.AddSingleton<OrderService>();
+            services.AddSingleton<DocumentService>();
             services.AddTransient<SaveFileDialogService>();
             services.AddTransient<ManufacturersService>();
             services.AddTransient<DeliveriesService>();

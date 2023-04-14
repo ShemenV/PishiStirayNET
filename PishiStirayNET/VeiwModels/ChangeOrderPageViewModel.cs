@@ -4,6 +4,7 @@ using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Infrastructure;
 using PishiStirayNET.Models;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace PishiStirayNET.VeiwModels
 {
     public partial class ChangeOrderPageViewModel : ObservableObject
     {
+        private readonly PageService _pageService;
         private readonly OrderService _orderService;
 
 
@@ -28,11 +30,12 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private DateTime selectedEndDate;
 
-        public ChangeOrderPageViewModel(OrderService orderService)
+        public ChangeOrderPageViewModel(OrderService orderService, PageService pageService)
         {
             _orderService = orderService;
 
             LoadData();
+            _pageService = pageService;
         }
 
         private async void LoadData()
@@ -51,7 +54,7 @@ namespace PishiStirayNET.VeiwModels
             ChangedOrder.OrderStatus = SelectedStatus.IdOrderStatus;
             ChangedOrder.OrderDeliveryDateEnd = SelectedEndDate;
             _orderService.ChangeOrder(ChangedOrder);
-            Debug.WriteLine("gtgtgtgtgt");
+            _pageService.ChangePage(new OrdersPage());
         }
     }
 }

@@ -33,7 +33,7 @@ namespace PishiStirayNET.Services
             return issuePoints;
         }
 
-        public async void CreateOrder(List<CartItem> cartItems, int issuepointID)
+        public async Task<Order> CreateOrder(List<CartItem> cartItems, int issuepointID)
         {
             int orderNumber = _tradeContext.Order1s.Max(o => o.OrderId) + 1;
             int receiptСode = _tradeContext.Order1s.Max(o => o.CodePoluch) + 1;
@@ -74,6 +74,21 @@ namespace PishiStirayNET.Services
             await _tradeContext.Orderproducts.AddRangeAsync(orderproductList);
 
             await _tradeContext.SaveChangesAsync();
+
+
+            return new Order {
+
+                OrderId = orderNumber,
+                OrderStatus = 2,
+                OrderDeliveryDate = DateTime.Now,
+                OrderDeliveryDateEnd = DateTime.Now.AddYears(6),
+                OrderPickupPoint = issuepointID,
+                Fio = Global.User != null ? $"{Global.User.UserSurname} {Global.User.UserName} {Global.User.UserPatronymic}" : null,
+                CodePoluch = receiptСode,
+                Products = await GetProducts(orderproductList),
+                FullPrice = (float)orderproductList.Sum(i => i.ProductArticleNumberNavigation.ProductCost),
+                Discount = (float)orderproductList.Sum(i => i.ProductArticleNumberNavigation.ProductCost/100 * i.ProductArticleNumberNavigation.ProductDiscountAmount)
+            };
         }
 
 
