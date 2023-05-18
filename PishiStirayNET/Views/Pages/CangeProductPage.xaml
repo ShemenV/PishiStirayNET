@@ -25,9 +25,18 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Добавить новый продукт" TextAlignment="Center"
-                  FontSize="30"/>
-
+        <Grid Grid.ColumnSpan="2">
+            <Button Content="Назад"
+                    Width="70"
+                    HorizontalAlignment="Left"
+                    Margin="10 0 0 0"
+                    Command="{Binding GoBackPageCommand}"/>
+            <TextBlock Text="Редактирование продукта" 
+                   TextAlignment="Center"
+                   Grid.ColumnSpan="2"
+                   FontSize="30"
+                   Margin="90 0 0 0"/>
+        </Grid>
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
                     Margin="0,10">
@@ -166,14 +175,6 @@
                  Text="{Binding CurrentDiscount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                    Margin="0,5"
                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-
-
-
-            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                   Grid.Column="1"
-                   Text="{Binding MaxDiscount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                    Margin="0 5"
-                  materialDesign:HintAssist.Hint="Максимальная скидка"/>
 
         </Grid>
 

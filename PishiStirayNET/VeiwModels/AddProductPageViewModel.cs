@@ -143,6 +143,11 @@ namespace PishiStirayNET.VeiwModels
         }
 
         [RelayCommand]
+        private void GoBackPage()
+        {
+            _pageService.ChangePage(new ProductsPage());
+        }
+        [RelayCommand]
         private async void AddNewProduct()
         {
             ValidateAllProperties();

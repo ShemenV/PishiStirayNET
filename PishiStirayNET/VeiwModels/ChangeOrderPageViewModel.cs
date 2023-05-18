@@ -56,5 +56,11 @@ namespace PishiStirayNET.VeiwModels
             _orderService.ChangeOrder(ChangedOrder);
             _pageService.ChangePage(new OrdersPage());
         }
+
+        [RelayCommand]
+        private void GoBackPage()
+        {
+            _pageService.ChangePage(new OrdersPage());
+        }
     }
 }

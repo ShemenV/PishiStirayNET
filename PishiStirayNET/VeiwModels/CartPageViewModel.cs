@@ -131,6 +131,11 @@ namespace PishiStirayNET.VeiwModels
             }
         }
 
+        [RelayCommand]
+        private void GoBackPage()
+        {
+            _pageService.ChangePage(new ProductsPage());
+        }
 
         private bool CanChangeCount()
         {

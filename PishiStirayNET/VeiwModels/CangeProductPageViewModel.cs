@@ -176,6 +176,12 @@ namespace PishiStirayNET.VeiwModels
 
 
         [RelayCommand]
+        private void GoBackPage()
+        {
+            _pageService.ChangePage(new ProductsPage());
+        }
+
+        [RelayCommand]
         private void ChangePhoto()
         {
             SelectedPath = _saveFileDialogService.ImageSaveFileDialog();

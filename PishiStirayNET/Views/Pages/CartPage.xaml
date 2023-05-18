@@ -23,10 +23,19 @@
         </Grid.RowDefinitions>
 
 
-        <TextBlock Text="Корзина" 
+        <Grid Grid.ColumnSpan="2">
+            <Button Content="Назад"
+                    Width="70"
+                    HorizontalAlignment="Left"
+                    Margin="10 0 0 0"
+                    Command="{Binding GoBackPageCommand}"/>
+            <TextBlock Text="Корзина" 
                    TextAlignment="Center"
                    Grid.ColumnSpan="2"
-                   FontSize="30"/>
+                   FontSize="30"
+                   Margin="90 0 0 0"/>
+        </Grid>
+        
 
 
         <ListView Grid.Row="1"

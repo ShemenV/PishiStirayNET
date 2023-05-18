@@ -101,6 +101,11 @@ namespace PishiStirayNET.VeiwModels
             OrdersList = orders;
         }
 
+        [RelayCommand]
+        private void GoBackPage()
+        {       
+                _pageService.ChangePage(new ProductsPage());
+        }
 
         [RelayCommand]
         private void GoToChangePage()

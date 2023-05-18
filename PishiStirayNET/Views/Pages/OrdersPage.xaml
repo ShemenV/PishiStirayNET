@@ -40,11 +40,16 @@
 
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="6*"/>
                     <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
+                <Button Width="70"
+                        Content="Назад"
+                        HorizontalAlignment="Left"
+                        Command="{Binding GoBackPageCommand}"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
                     <ComboBox Style="{StaticResource MaterialDesignFilledComboBox}"
                       materialDesign:HintAssist.Hint="Сорртировка по цене"
                           MinWidth="200"
@@ -92,7 +97,7 @@
                 <ListView ItemsSource="{Binding SelectedOrder.Products}"
                       Grid.Column="1"
                       VerticalAlignment="Top"
-                                                     Height="{Binding ActualHeight, ElementName=OrderPage, Mode=OneWay, Converter={converters:SubtractConverter Value=100}}"
+                      Height="{Binding ActualHeight, ElementName=OrderPage, Mode=OneWay, Converter={converters:SubtractConverter Value=100}}"
 >
 
                     <ListView.ItemsPanel>

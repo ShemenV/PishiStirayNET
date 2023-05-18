@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Services;
+using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace PishiStirayNET.VeiwModels
     public partial class DeliveriesPageViewModel : ObservableValidator
     {
         private readonly DeliveriesService _deliveriesService;
+        private readonly PageService _pageService;
 
         [ObservableProperty]
         [Required(ErrorMessage = "Заполните поле")]
@@ -25,10 +27,11 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private bool _isChanged = false;
 
-        public DeliveriesPageViewModel(DeliveriesService deliveriesService)
+        public DeliveriesPageViewModel(DeliveriesService deliveriesService, PageService pageService)
         {
             _deliveriesService = deliveriesService;
             LoadDataAsync();
+            _pageService = pageService;
         }
 
         private async void LoadDataAsync()
@@ -75,6 +78,12 @@ namespace PishiStirayNET.VeiwModels
             IsChanged = false;
             Name = string.Empty;
             SelectedDelivery = null;
+        }
+
+        [RelayCommand]
+        private void GoBackPage()
+        {
+            _pageService.ChangePage(new ProductsPage());
         }
     }
 }
