@@ -9,7 +9,6 @@ namespace PishiStirayNET.Models
         private Product product;
 
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(Cost))]
         private int count;
 
         public float? Cost => (float?)(Product?.ProductCost * Count);

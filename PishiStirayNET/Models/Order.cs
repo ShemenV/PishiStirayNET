@@ -12,6 +12,12 @@ namespace PishiStirayNET.Models
         [ObservableProperty]
         private float discount;
 
+
+        public float? Price
+        {
+            get => FullPrice - Discount;
+        }
+
         [ObservableProperty]
         private List<int> productQuatities;
 

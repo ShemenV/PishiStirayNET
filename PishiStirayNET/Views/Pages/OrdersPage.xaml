@@ -94,6 +94,8 @@
                 <TextBlock Text="Состав заказа"
                            FontSize="33"
                            TextAlignment="Center"/>
+                
+                
                 <ListView ItemsSource="{Binding SelectedOrder.Products}"
                       Grid.Column="1"
                       VerticalAlignment="Top"
@@ -275,6 +277,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
 
 
@@ -284,9 +287,9 @@
                                     <TextBlock Grid.Row="1" 
                                        Grid.Column="0"
                                        Text="{Binding OrderDeliveryDate, StringFormat='Дата заказа - {0:dd.MM.yyyy}'}"/>
-                                    <DatePicker Grid.Row="2" 
+                                    <TextBlock Grid.Row="2" 
                                        Grid.Column="0"
-                                       SelectedDate="{Binding OrderDeliveryDateEnd,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='Дата доставки - {0:dd.MM.yyyy}'}"/>
+                                      Text="{Binding OrderDeliveryDateEnd, StringFormat='Дата доставки - {0:dd.MM.yyyy}'}"/>
                                     <TextBlock Grid.Row="3" 
                                        Grid.Column="0"
                                        Text="{Binding Fio, StringFormat='ФИО клиента - {0}'}"/>
@@ -296,11 +299,15 @@
 
                                     <TextBlock Grid.Row="0" 
                                        Grid.Column="1"
-                                       Text="{Binding FullPrice, StringFormat='Стоимость заказа - {0} ₽'}"/>
+                                       Text="{Binding FullPrice, StringFormat='Стоимость заказа - {0:f2} ₽'}"/>
 
                                     <TextBlock Grid.Row="1" 
                                        Grid.Column="1"
-                                       Text="{Binding Discount, StringFormat='Скидка - {0:f0} %'}"/>
+                                       Text="{Binding Discount, StringFormat='Скидка - {0:f2} ₽'}"/>
+
+                                    <TextBlock Grid.Row="2" 
+                                       Grid.Column="1"
+                                       Text="{Binding Price, StringFormat='Итоговая цена - {0:f2} ₽'}"/>
 
                                     <Border Height="auto" 
                                     Grid.Row="5"

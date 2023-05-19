@@ -71,11 +71,6 @@ namespace PishiStirayNET.VeiwModels
         [Range(0, 100, ErrorMessage = "Не более 6 символов и только числа")]
         private float? currentDiscount;
 
-        [ObservableProperty]
-        [Required(ErrorMessage = "Заполните поле")]
-        [Range(0, 100, ErrorMessage = "Не более 2 символов и только числа")]
-        private int? maxDiscount;
-
 
         [ObservableProperty]
         [Required(ErrorMessage = "Заполните поле")]
@@ -208,7 +203,6 @@ namespace PishiStirayNET.VeiwModels
                     ProductCost = (decimal)Price,
                     CurrentDiscount = (sbyte?)CurrentDiscount,
                     ProductQuantityInStock = (int)MaxCount,
-                    ProductDiscountAmount = MaxDiscount,
                     UnitOfMeasurement = SelectedUnit.IdUnit,
                     Delivery = SelectedDelivery.IdProvider
                 });

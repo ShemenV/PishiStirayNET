@@ -43,7 +43,17 @@ namespace PishiStirayNET.VeiwModels
             await Task.Delay(100);
             Statuses = await _orderService.GetOrderStatuses();
             ChangedOrder = Global.Order;
-            SelectedStatus = ChangedOrder.OrderStatusNavigation;
+            Debug.WriteLine("________________");
+            
+            foreach (var stat in statuses)
+            {
+                if(stat.IdOrderStatus == ChangedOrder.OrderStatus)
+                {
+                    SelectedStatus = stat;
+                    break;
+                }
+            }
+                     
             SelectedEndDate = ChangedOrder.OrderDeliveryDateEnd;
         }
 
@@ -54,6 +64,7 @@ namespace PishiStirayNET.VeiwModels
             ChangedOrder.OrderStatus = SelectedStatus.IdOrderStatus;
             ChangedOrder.OrderDeliveryDateEnd = SelectedEndDate;
             _orderService.ChangeOrder(ChangedOrder);
+            await Task.Delay(100);
             _pageService.ChangePage(new OrdersPage());
         }
 
