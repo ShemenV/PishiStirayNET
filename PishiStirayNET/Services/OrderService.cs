@@ -137,13 +137,14 @@ namespace PishiStirayNET.Services
             return quantities;
         }
 
-        private async Task<List<Product>> GetProducts(ICollection<Orderproduct> orderproducts)
+        private async Task<List<CartItem>> GetProducts(ICollection<Orderproduct> orderproducts)
         {
-            List<Product> products = new List<Product>();
+            List<CartItem> products = new List<CartItem>();
 
             foreach (var product in orderproducts.ToList())
             {
-                products.Add(new Product
+                CartItem cartItem = new CartItem();
+                cartItem.Product = new Product
                 {
                     ProductArticleNumber = product.ProductArticleNumberNavigation.ProductArticleNumber,
                     CurrentDiscount = product.ProductArticleNumberNavigation.CurrentDiscount,
@@ -158,7 +159,9 @@ namespace PishiStirayNET.Services
                     UnitOfMeasurementNavigation = product.ProductArticleNumberNavigation.UnitOfMeasurementNavigation,
                     ProductDiscountAmount = product.ProductArticleNumberNavigation.ProductDiscountAmount,
 
-                });
+                };
+
+                cartItem.Count = product.Count;
             }
 
             return products;
