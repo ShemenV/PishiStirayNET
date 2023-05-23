@@ -1,18 +1,11 @@
 ﻿using iText.IO.Font;
-using iText.IO.Image;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
-using Org.BouncyCastle.Asn1.Mozilla;
 using PishiStirayNET.Data;
-using PishiStirayNET.Data.DbEntities;
 using PishiStirayNET.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PishiStirayNET.Services
 {
@@ -59,6 +52,14 @@ namespace PishiStirayNET.Services
                 .SetFontSize(14);
             document.Add(content);
 
+            content = new Paragraph($"Kод получения - {order.CodePoluch}")
+             .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+             .SetFont(comic)
+             .SetFontSize(22)
+             .SetBold();
+            document.Add(content);
+
+
             content = new Paragraph($"Состав заказа")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .SetFont(comic)
@@ -67,12 +68,13 @@ namespace PishiStirayNET.Services
             document.Add(content);
 
 
+
             Table table = new(6);
             table.SetVerticalAlignment(iText.Layout.Properties.VerticalAlignment.BOTTOM);
             table.SetFont(comic);
             table.SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT);
 
-            table.AddCell("Изображение");
+            table.AddCell("Артикул");
             table.AddCell("Название");
             table.AddCell("Описание");
             table.AddCell("Производитель");
@@ -80,12 +82,11 @@ namespace PishiStirayNET.Services
             table.AddCell("Скидка");
 
 
-          
-          
-            foreach(var product in order.Products)
+
+
+            foreach (var product in order.Products)
             {
-                table.AddCell(new Image(ImageDataFactory.Create(product.ImageUrl)).SetHeight(200)
-               .SetWidth(200));
+                table.AddCell(product.ProductArticleNumber);
                 table.AddCell(product.ProductName);
                 table.AddCell(product.ProductDescription);
                 table.AddCell(product.ProductManufacturerNavigation.Name);
@@ -113,11 +114,7 @@ namespace PishiStirayNET.Services
             document.Add(content);
 
 
-            content = new Paragraph($"Kод получения - {order.CodePoluch}")
-                .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                .SetFont(comic)
-                .SetFontSize(14);
-            document.Add(content);
+
 
 
 

@@ -3,11 +3,9 @@ using System.IO;
 
 namespace PishiStirayNET.Models
 {
-    public class Product:ProductDB
+    public class Product : ProductDB
     {
-      
-
-
+        public int Count { get; set; }
         public string Image { get; set; }
 
 
@@ -26,7 +24,7 @@ namespace PishiStirayNET.Models
             {
                 if (CurrentDiscount != 0)
                 {
-                    return (float?)((float)ProductCost - ((float)ProductCost * ((float?)CurrentDiscount / 100))) ;
+                    return (float?)((float)ProductCost - ((float)ProductCost * ((float?)CurrentDiscount / 100)));
                 }
                 return 0;
             }
@@ -40,6 +38,6 @@ namespace PishiStirayNET.Models
             }
         }
 
-      
+
     }
 }

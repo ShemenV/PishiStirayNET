@@ -6,7 +6,6 @@ using PishiStirayNET.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,10 +73,21 @@ namespace PishiStirayNET.Services
 
             await _tradeContext.Orderproducts.AddRangeAsync(orderproductList);
 
+            foreach (var item in _tradeContext.Products)
+            {
+                if (item.ProductQuantityInStock <= 0)
+                {
+                    item.IsDeleted = 1;
+
+                }
+            }
+
+
             await _tradeContext.SaveChangesAsync();
 
 
-            return new Order {
+            return new Order
+            {
 
                 OrderId = orderNumber,
                 OrderStatus = 2,
@@ -88,7 +98,7 @@ namespace PishiStirayNET.Services
                 CodePoluch = receiptСode,
                 Products = await GetProducts(orderproductList),
                 FullPrice = (float)orderproductList.Sum(i => i.ProductArticleNumberNavigation.ProductCost),
-                Discount = (float)orderproductList.Sum(i => i.ProductArticleNumberNavigation.ProductCost/100 * i.ProductArticleNumberNavigation.ProductDiscountAmount)
+                Discount = (float)orderproductList.Sum(i => i.ProductArticleNumberNavigation.ProductCost / 100 * i.ProductArticleNumberNavigation.ProductDiscountAmount)
             };
         }
 
@@ -112,7 +122,7 @@ namespace PishiStirayNET.Services
                     OrderStatus = order1.OrderStatus,
                     OrderStatusNavigation = order1.OrderStatusNavigation,
                     FullPrice = (float)order1.Orderproducts.ToList().Sum(op => op.Count * op.ProductArticleNumberNavigation.ProductCost),
-                    Discount = (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost/Convert.ToDecimal( 100) * op.ProductArticleNumberNavigation.CurrentDiscount)),
+                    Discount = (float)order1.Orderproducts.ToList().Sum(op => op.Count * (op.ProductArticleNumberNavigation.ProductCost / Convert.ToDecimal(100) * op.ProductArticleNumberNavigation.CurrentDiscount)),
                     ProductQuatities = GetProductsQuatities(order1.Orderproducts),
                     Products = await GetProducts(order1.Orderproducts)
 
@@ -157,7 +167,7 @@ namespace PishiStirayNET.Services
                     Delivery = product.ProductArticleNumberNavigation.Delivery,
                     UnitOfMeasurementNavigation = product.ProductArticleNumberNavigation.UnitOfMeasurementNavigation,
                     ProductDiscountAmount = product.ProductArticleNumberNavigation.ProductDiscountAmount,
-
+                    Count = product.Count
                 });
             }
 

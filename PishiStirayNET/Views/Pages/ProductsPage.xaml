@@ -195,7 +195,7 @@
 
                                     <TextBlock Text="Цена - "/>
 
-                                    <TextBlock Text="{Binding ProductCost,  StringFormat='{}{0} ₽'}"
+                                    <TextBlock Text="{Binding ProductCost,  StringFormat='{}{0:F2} ₽'}"
                                           >
                                         <TextBlock.Style>
                                             <Style TargetType="{x:Type TextBlock}">
@@ -216,7 +216,7 @@
 
                                     <TextBlock 
                                         x:Name="newPriceTextBlock"
-                                        Text="{Binding NewPrice,  StringFormat='{}{0} ₽'}"
+                                        Text="{Binding NewPrice,  StringFormat='{}{0:F2} ₽'}"
                                            Margin="5,0"/>
 
                                 </StackPanel>
