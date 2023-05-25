@@ -78,8 +78,8 @@ namespace PishiStirayNET.Services
             table.AddCell("Название");
             table.AddCell("Описание");
             table.AddCell("Производитель");
-            table.AddCell("Цена");
-            table.AddCell("Скидка");
+            table.AddCell("Цена (₽)");
+            table.AddCell("Скидка (%)");
 
 
 
