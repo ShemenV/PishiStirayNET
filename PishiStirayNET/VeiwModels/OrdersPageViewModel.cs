@@ -6,6 +6,8 @@ using PishiStirayNET.Services;
 using PishiStirayNET.Views.Pages;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PishiStirayNET.VeiwModels
 {
@@ -20,6 +22,7 @@ namespace PishiStirayNET.VeiwModels
             _pageService = pageService;
 
             SelectedFilter = FiltersList[0];
+            SelectedStatus = StatusesList[0];
         }
 
 
@@ -41,6 +44,14 @@ namespace PishiStirayNET.VeiwModels
         [ObservableProperty]
         private string? selectedSort;
 
+        [ObservableProperty]
+        private List<string> statusesList = new() { "Все статусы", "Завершен", "Новый" };
+
+        [ObservableProperty]
+        private string? selectedStatus;
+
+
+
 
 
         partial void OnSelectedSortChanged(string? value)
@@ -55,9 +66,15 @@ namespace PishiStirayNET.VeiwModels
             UpdateOrdersList();
         }
 
+        partial void OnSelectedStatusChanged(string? value)
+        {
+            UpdateOrdersList();
+        }
+
 
         private async void UpdateOrdersList()
         {
+            
             List<Order> orders = await _orderService.GetAllOrdersAsync();
 
             switch (SelectedFilter)
@@ -66,6 +83,7 @@ namespace PishiStirayNET.VeiwModels
                     orders = orders.ToList();
 
                     break;
+
                 case "0 - 9,99%":
                     orders = orders.Where(p => p.Discount >= 0 && p.Discount <= 9.99 || p.Discount == null).ToList();
                     break;
@@ -75,6 +93,22 @@ namespace PishiStirayNET.VeiwModels
                 case "15% и более":
                     orders = orders.Where(p => p.Discount >= 15).ToList();
                     break;
+            }
+
+            switch (SelectedStatus)
+            {
+                case "Все статусы":
+                    orders = orders.ToList();
+
+                    break;
+
+                case "Завершен":
+                    orders = orders.Where(p => p.OrderStatus == 1).ToList();
+                    break;
+                case "Новый":
+                    orders = orders.Where(p => p.OrderStatus == 2).ToList();
+                    break;
+                
             }
 
             switch (SelectedSort)
@@ -97,6 +131,8 @@ namespace PishiStirayNET.VeiwModels
                     }).ToList();
                     break;
             }
+
+          
 
             OrdersList = orders;
         }
